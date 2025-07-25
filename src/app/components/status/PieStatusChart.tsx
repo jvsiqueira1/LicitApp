@@ -127,13 +127,6 @@ export const PieStatusChart: React.FC<PieStatusChartProps> = (props) => {
     setExplodedSlice({ index: idx, midAngle: midAngles[idx] });
   }, [selectedStatusId, data, highlightSelected, midAngles]);
 
-  // Diagnóstico: logar dados recebidos
-  if (typeof window !== 'undefined') {
-    // Só loga no client
-    console.log('[PieStatusChart] data:', data);
-    console.log('[PieStatusChart] statuses:', statuses);
-  }
-
   // Diagnóstico: verificar se algum status está sem cor
   const missingColor = statuses.filter(s => !s.color_hex || s.color_hex === '#888');
 

@@ -6,71 +6,64 @@
   :root {
     /* Tokens HSL */
     --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
+    --foreground: 0 0% 10%;
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
+    --card-foreground: 0 0% 10%;
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
+    --popover-foreground: 0 0% 10%;
+    --primary: 0 0% 10%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 98%;
+    --secondary-foreground: 0 0% 10%;
     --muted: 0 0% 96.1%;
     --muted-foreground: 0 0% 45.1%;
     --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
+    --accent-foreground: 0 0% 10%;
     --destructive: 0 84% 85%; /* vermelho suave claro */
     --destructive-foreground: 0 60% 30%; /* texto vermelho escuro */
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 0 0% 10%;
     --chart-1: 12 76% 61%;
     --chart-2: 173 58% 39%;
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
-    /* Tokens customizados */
-    --color-background-primary: #ffffff;
-    --color-background-secondary: #f8f8f8;
-    --color-text-primary: #111111;
-    --color-text-secondary: #6b7280;
-    --color-border-subtle: #d1d5db;
-    --color-highlight: #e5e7eb;
-    --color-hover: #f3f4f6;
-    --color-focus-ring: rgba(0,0,0,0.15);
-    --color-icon-primary: #111111;
-    --color-icon-secondary: #6b7280;
+    /* Paleta sóbria clara */
+    --color-background-primary: #fff;
+    --color-background-secondary: #f7f7f8;
+    --color-text-primary: #111;
+    --color-text-secondary: #444;
+    --color-border-subtle: #e5e7eb;
+    --color-highlight: #f3f4f6;
+    --color-hover: #ededed;
+    --color-focus-ring: rgba(0,0,0,0.10);
+    --color-icon-primary: #111;
+    --color-icon-secondary: #888;
     --color-progress-fill: #22C55E;
     --color-project-indicator: #fff;
   }
   .dark {
-    /* Tokens HSL */
-    --background: 0 0% 3.9%;
+    --background: 0 0% 10%;
     --foreground: 0 0% 98%;
-    --card: 0 0% 3.9%;
+    --card: 0 0% 14%;
     --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
+    --popover: 0 0% 14%;
     --popover-foreground: 0 0% 98%;
     --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 14.9%;
+    --primary-foreground: 0 0% 10%;
+    --secondary: 0 0% 18%;
     --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14.9%;
+    --muted: 0 0% 18%;
     --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 14.9%;
+    --accent: 0 0% 18%;
     --accent-foreground: 0 0% 98%;
-    --destructive: 0 60% 30%; /* vermelho suave escuro */
-    --destructive-foreground: 0 84% 85%; /* texto vermelho claro */
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
+    --destructive: 0 60% 30%;
+    --destructive-foreground: 0 84% 85%;
+    --border: 0 0% 18%;
+    --input: 0 0% 18%;
     --ring: 0 0% 83.1%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
-    /* Tokens customizados */
     --color-background-primary: #18181b;
     --color-background-secondary: #232326;
     --color-text-primary: #f3f4f6;
@@ -84,10 +77,10 @@
     --color-project-indicator: #111;
   }
   * {
-    @apply border-border;
+    @apply border-[var(--color-border-subtle)];
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-[var(--color-background-primary)] text-[var(--color-text-primary)];
   }
 }
 
@@ -113,4 +106,12 @@
 }
 .recharts-sector[stroke] {
   stroke: none !important;
+}
+
+[data-state='active'].shadcn-tabs-trigger {
+  background: var(--color-background-primary) !important;
+  color: var(--color-text-primary) !important;
+  box-shadow: none !important;
+  outline: none !important;
+  border-color: var(--color-border-subtle) !important;
 }
