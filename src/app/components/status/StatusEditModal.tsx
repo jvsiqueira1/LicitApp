@@ -3,12 +3,11 @@ import React, { useState, useEffect } from "react";
 import { createOrReuseStatus } from "@/app/lib/statusUtils";
 import { useSupabase } from "../../context/SupabaseContext";
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import { CheckIcon } from "@heroicons/react/24/solid";
 
 interface Status {
   id: string;
   name: string;
-  color?: string;
+  color_hex?: string;
 }
 
 interface StatusEditModalProps {
@@ -16,7 +15,7 @@ interface StatusEditModalProps {
   onClose: () => void;
   onStatusSaved: () => void;
   status?: Status | null; // null = criar novo, Status = editar existente
-  listId: string;
+  projectId: string;
 }
 
 const DEFAULT_STATUS_COLOR = "#3B82F6";
@@ -26,7 +25,7 @@ export default function StatusEditModal({
   onClose, 
   onStatusSaved, 
   status, 
-  listId 
+  projectId 
 }: StatusEditModalProps) {
   const { supabase } = useSupabase();
   const [name, setName] = useState("");
@@ -38,7 +37,7 @@ export default function StatusEditModal({
   useEffect(() => {
     if (status) {
       setName(status.name);
-      setColor(status.color || DEFAULT_STATUS_COLOR);
+      setColor(status.color_hex || DEFAULT_STATUS_COLOR);
     } else {
       setName("");
       setColor(DEFAULT_STATUS_COLOR);
@@ -48,38 +47,26 @@ export default function StatusEditModal({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name.trim()) {
-      setError("O nome é obrigatório.");
-      return;
-    }
+    if (!name.trim()) return;
 
     setLoading(true);
-    setError(null);
-
     try {
       if (status) {
-        // Editar status existente
+        // Atualizar status existente
         const { error } = await supabase
           .from("statuses")
           .update({ name: name.trim(), color_hex: color })
           .eq("id", status.id);
         if (error) throw new Error(error.message || JSON.stringify(error));
       } else {
-        // Buscar o project_id da lista
-        const { data: listData, error: listError } = await supabase
-          .from("lists")
-          .select("project_id")
-          .eq("id", listId)
-          .single();
-        if (listError || !listData) throw new Error("Erro ao buscar projeto da lista");
-        // Deduplicação: criar ou reutilizar status
-        await createOrReuseStatus(supabase, listData.project_id, name.trim(), color);
+        // Criar novo status
+        await createOrReuseStatus(supabase, projectId, name.trim(), color);
       }
-
       onStatusSaved();
       onClose();
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Erro ao salvar status");
+    } catch (error) {
+      console.error("Erro ao salvar status:", error);
+      setError(error instanceof Error ? error.message : "Erro desconhecido");
     } finally {
       setLoading(false);
     }
@@ -93,18 +80,11 @@ export default function StatusEditModal({
     setLoading(true);
     setError(null);
     try {
-      // Buscar o project_id da lista
-      const { data: listData, error: listError } = await supabase
-        .from("lists")
-        .select("project_id")
-        .eq("id", listId)
-        .single();
-      if (listError || !listData) throw new Error("Erro ao buscar projeto da lista");
       // Buscar outros status do mesmo projeto
       const { data: otherStatuses, error: statusError } = await supabase
         .from("statuses")
         .select("id")
-        .eq("project_id", listData.project_id)
+        .eq("project_id", projectId)
         .neq("id", status.id)
         .order("order_index", { ascending: true })
         .limit(1);

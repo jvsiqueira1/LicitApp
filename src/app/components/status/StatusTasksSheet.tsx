@@ -1,23 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { DialogDescription } from "@/components/ui/dialog";
-import type { Status } from "../task/ListList";
+import type { Status } from "../../hooks/useStatuses";
 import { useSupabase } from "@/app/context/SupabaseContext";
 import type { Task } from "../task/TaskEditModal";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Progress } from "@/components/ui/progress";
 import PieStatusChart, { PieStatusChartData } from "./PieStatusChart";
 
 interface StatusTasksSheetProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   status: Status | null;
-  projectId: string;
   chartData: PieStatusChartData[];
   statuses: Status[];
 }
 
-export const StatusTasksModal: React.FC<StatusTasksSheetProps> = ({ open, onOpenChange, status, projectId, chartData, statuses }) => {
+export const StatusTasksModal: React.FC<StatusTasksSheetProps> = ({ open, onOpenChange, status, chartData, statuses }) => {
   const { supabase } = useSupabase();
   // Estado local para status selecionado no modal
   const [selectedStatus, setSelectedStatus] = useState<Status | null>(status);

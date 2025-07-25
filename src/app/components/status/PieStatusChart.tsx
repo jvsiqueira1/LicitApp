@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useMemo, useState } from "react";
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Sector } from "recharts";
-import type { Status } from "../task/ListList";
+import type { Status } from "../../hooks/useStatuses";
 import type { PieSectorDataItem } from "recharts/types/polar/Pie";
 
 export interface PieStatusChartData {
@@ -22,7 +22,7 @@ interface PieStatusChartProps {
 }
 
 export const PieStatusChart: React.FC<PieStatusChartProps> = (props) => {
-  const { data, statuses, onSliceClick, loading, selectedStatusId, onSliceHover, highlightSelected = false, explodeOffset } = props;
+  const { data, statuses, onSliceClick, loading, selectedStatusId, onSliceHover, highlightSelected = false } = props;
   // Mapeia statusId para cor dinâmica usando color_hex
   const colorMap = useMemo(() => {
     return statuses.reduce((acc, status) => {
@@ -59,59 +59,7 @@ export const PieStatusChart: React.FC<PieStatusChartProps> = (props) => {
     }
   };
 
-  // Função customizada para desenhar a fatia "explodida" (offset controlado por prop)
-  function renderActiveShapeWithOffset(offsetValue: number) {
-    return function renderActiveShape(props: unknown): React.ReactElement {
-      // Type guard for required props
-      if (
-        typeof props === 'object' && props !== null &&
-        'cx' in props && 'cy' in props && 'midAngle' in props &&
-        'innerRadius' in props && 'outerRadius' in props &&
-        'startAngle' in props && 'endAngle' in props && 'fill' in props
-      ) {
-        const { cx, cy, midAngle, innerRadius, outerRadius, startAngle, endAngle, fill } = props as PieSectorDataItem & {
-          cx: number;
-          cy: number;
-          midAngle: number;
-          innerRadius: number;
-          outerRadius: number;
-          startAngle: number;
-          endAngle: number;
-          fill: string;
-        };
-        const RADIAN = Math.PI / 180;
-        return (
-          <g style={{
-            transition: 'transform 0.25s cubic-bezier(.4,2,.6,1), opacity 0.25s cubic-bezier(.4,2,.6,1)',
-            transform: 'scale(1.04)',
-            opacity: 0.98,
-          }}>
-            <Sector
-              cx={cx}
-              cy={cy}
-              innerRadius={innerRadius}
-              outerRadius={outerRadius}
-              startAngle={startAngle}
-              endAngle={endAngle}
-              fill={fill}
-              stroke="none"
-              strokeWidth={0}
-              fillRule="evenodd"
-              pointerEvents="auto"
-              style={{
-                userSelect: 'none',
-                stroke: 'none !important',
-                outline: 'none !important',
-                boxShadow: 'none !important',
-              }}
-            />
-          </g>
-        );
-      }
-      // Always return a valid ReactElement
-      return <g />;
-    };
-  }
+
 
   // Sincroniza o highlight explodido com o status selecionado
   React.useEffect(() => {

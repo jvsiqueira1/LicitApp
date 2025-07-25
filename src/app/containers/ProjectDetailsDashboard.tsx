@@ -10,7 +10,7 @@ import { useLists, List as TaskList } from "../hooks/useLists";
 import { useStatuses } from "../hooks/useStatuses";
 import PieStatusChart from "../components/status/PieStatusChart";
 import { StatusTasksModal } from "../components/status/StatusTasksSheet";
-import type { Status } from "../components/task/ListList";
+import type { Status } from "../hooks/useStatuses";
 import { Progress } from "@/components/ui/progress";
 import type { Task } from "../components/task/TaskEditModal";
 
@@ -123,6 +123,10 @@ export default function ProjectDetailsDashboard({
     fetchStatuses().then((data) => {
       setStatuses(data);
       setStatusesLoading(false);
+    }).catch((error) => {
+      console.error("ProjectDetailsDashboard: error fetching statuses =", error);
+      setStatuses([]);
+      setStatusesLoading(false);
     });
   }, [fetchStatuses]);
 
@@ -146,7 +150,7 @@ export default function ProjectDetailsDashboard({
       .from("tasks")
       .select("*")
       .in("list_id", listIds)
-      .then(({ data, error }) => {
+      .then(({ data }) => {
         setTasks(data || []);
       });
   }, [taskLists, supabase]);
@@ -252,7 +256,6 @@ export default function ProjectDetailsDashboard({
                 open={sheetOpen}
                 onOpenChange={setSheetOpen}
                 status={selectedStatus}
-                projectId={project.id}
                 chartData={pieData || []}
                 statuses={statuses || []}
               />

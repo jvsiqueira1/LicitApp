@@ -6,8 +6,8 @@ export interface Status {
   project_id: string;
   name: string;
   color_hex: string;
-  order_index: number;
-  created_at: string;
+  created_at?: string;
+  order_index?: number;
 }
 
 export function useStatuses(projectId: string | undefined) {
@@ -15,14 +15,31 @@ export function useStatuses(projectId: string | undefined) {
 
   const fetchStatuses = useCallback(async () => {
     if (!projectId) return [];
-    // Buscar statuses do projeto (ordenar por order_index customizável)
-    const { data, error } = await supabase
-      .from("statuses")
-      .select("*")
-      .eq("project_id", projectId)
-      .order("order_index", { ascending: true });
-    if (error) throw new Error(error.message || JSON.stringify(error));
-    return data as Status[];
+    
+    try {
+      // Buscar statuses diretamente pelo project_id
+      const { data, error } = await supabase
+        .from("statuses")
+        .select("*")
+        .eq("project_id", projectId)
+        .order("order_index", { ascending: true });
+      
+      if (error) {
+        console.error("fetchStatuses: statusesError =", error);
+        throw new Error(error.message || JSON.stringify(error));
+      }
+      
+      // Garantir que o campo color sempre tenha um valor
+      const result = (data || []).map(status => ({
+        ...status,
+        color: status.color_hex || '#3B82F6' // fallback para azul
+      })) as Status[];
+      
+      return result;
+    } catch (err) {
+      console.error("fetchStatuses: unexpected error =", err);
+      return [];
+    }
   }, [projectId, supabase]);
 
   const createStatus = useCallback(
@@ -34,7 +51,7 @@ export function useStatuses(projectId: string | undefined) {
           project_id: projectId, 
           name, 
           color_hex,
-          order_index: 0 // Será atualizado posteriormente se necessário
+          order_index: 0
         });
       if (error) throw new Error(error.message || JSON.stringify(error));
     },
@@ -64,7 +81,7 @@ export function useStatuses(projectId: string | undefined) {
   );
 
   const updateStatusOrder = useCallback(
-    async (statuses: Array<{ id: string; order_index: number }>) => {
+    async (statuses: Array<{ id: string; project_id: string; name: string; color_hex: string; order_index: number }>) => {
       const { error } = await supabase
         .from("statuses")
         .upsert(statuses, { onConflict: "id" });

@@ -20,7 +20,7 @@ export interface Task {
 interface Status {
   id: string;
   name: string;
-  color?: string;
+  color_hex?: string;
 }
 
 interface TaskEditModalProps {

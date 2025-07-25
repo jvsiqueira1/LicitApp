@@ -182,16 +182,29 @@ export default function ListForm({
         const { data, error } = await supabase.from("lists").insert(insertData).select().single();
         if (error) setError(error.message);
         else {
-          // Se for pasta e statusConfig estiver preenchido, criar os status
-          if ((type === "lista" || type === "sprint") && statusConfig.trim()) {
-            const statusNames = statusConfig.split(",").map(s => s.trim()).filter(Boolean);
-            if (statusNames.length > 0 && data?.id) {
+          // Criar statuses padrão para listas e sprints
+          if ((type === "lista" || type === "sprint") && data?.id) {
+            let statusNames: string[] = [];
+            
+            // Se statusConfig estiver preenchido, usar ele
+            if (statusConfig.trim()) {
+              statusNames = statusConfig.split(",").map(s => s.trim()).filter(Boolean);
+            } else {
+              // Caso contrário, criar statuses padrão
+              statusNames = ["A fazer", "Em andamento", "Concluído"];
+            }
+            
+            if (statusNames.length > 0) {
               const statusRows = statusNames.map((name, idx) => ({
                 name,
-                list_id: data.id,
-                order_index: idx,
+                project_id: projectId,
+                color_hex: idx === 0 ? "#3B82F6" : idx === 1 ? "#F59E0B" : "#10B981", // Azul, Amarelo, Verde
+                order_index: idx
               }));
-              await supabase.from("statuses").insert(statusRows);
+              const { error: statusError } = await supabase.from("statuses").insert(statusRows);
+              if (statusError) {
+                console.error("Erro ao criar statuses padrão:", statusError);
+              }
             }
           }
           onListAdded();

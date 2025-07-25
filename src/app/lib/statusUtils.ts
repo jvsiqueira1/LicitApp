@@ -5,44 +5,47 @@ export interface Status {
   project_id: string;
   name: string;
   color_hex: string;
-  order_num?: number;
+  created_at?: string;
+  order_index?: number;
 }
 
-/**
- * Cria ou reutiliza um status único por projeto.
- * @param supabase Instância do SupabaseClient
- * @param projectId ID do projeto
- * @param name Nome do status
- * @param color_hex Cor do status
- * @returns Status existente ou recém-criado
- */
 export async function createOrReuseStatus(
   supabase: SupabaseClient,
   projectId: string,
-  name: string,
-  color_hex: string
+  statusName: string,
+  colorHex: string = "#3B82F6"
 ): Promise<Status> {
-  // 1. Verificar se já existe status com esse nome no projeto
-  const { data: existing, error: selectError } = await supabase
+  // Primeiro, verificar se já existe um status com esse nome no projeto
+  const { data: existingStatus, error: searchError } = await supabase
     .from("statuses")
     .select("*")
     .eq("project_id", projectId)
-    .eq("name", name)
+    .eq("name", statusName)
     .single();
 
-  if (selectError && selectError.code !== "PGRST116") throw selectError; // PGRST116 = no rows found
-
-  if (existing) {
-    // Já existe, retorna o existente
-    return existing as Status;
-  } else {
-    // Não existe, cria novo
-    const { data, error: insertError } = await supabase
-      .from("statuses")
-      .insert({ project_id: projectId, name, color_hex })
-      .select()
-      .single();
-    if (insertError) throw insertError;
-    return data as Status;
+  if (searchError && searchError.code !== "PGRST116") {
+    throw new Error(`Erro ao buscar status: ${searchError.message}`);
   }
+
+  if (existingStatus) {
+    return existingStatus;
+  }
+
+  // Se não existe, criar um novo status
+  const { data: newStatus, error: insertError } = await supabase
+    .from("statuses")
+    .insert({
+      project_id: projectId,
+      name: statusName,
+      color_hex: colorHex,
+      order_index: 0
+    })
+    .select()
+    .single();
+
+  if (insertError) {
+    throw new Error(`Erro ao criar status: ${insertError.message}`);
+  }
+
+  return newStatus;
 } 

@@ -25,7 +25,7 @@ import {
   PopoverTrigger,
 } from "../../../components/ui/popover";
 import TaskEditModal from "../task/TaskEditModal";
-import type { Status } from "../task/ListList";
+import type { Status } from "../../hooks/useStatuses";
 import { TaskEventsContext } from "../../context/TaskEventsContext";
 import { useTaskEvents } from "../../context/TaskEventsContext";
 import ToggleTheme from "./ToggleTheme";
@@ -220,8 +220,8 @@ export default function SidebarProjectTree({ userId, projects, loading, reloadPr
       const { data, error } = await supabase
         .from("statuses")
         .select("*")
-        .eq("project_id", listOrSprint.project_id)
-        .order("order_index", { ascending: true });
+        .eq("list_id", listOrSprint.id)
+        .order("created_at", { ascending: true });
       if (error) throw new Error(error.message || JSON.stringify(error));
       statuses = data as Status[];
       setStatusesCache((prev) => ({ ...prev, [listOrSprint.id]: statuses }));
@@ -857,7 +857,6 @@ function FolderListsAndSprints({
                 </ContextMenuItem>
                 <ContextMenuItem
                   onClick={() => {
-                    console.log("Adicionar tarefa ao sprint:", sprint.name);
                   }}
                 >
                   Adicionar tarefa

@@ -29,8 +29,8 @@ import { CSS } from "@dnd-kit/utilities";
 interface Status {
   id: string;
   name: string;
-  color?: string;
-  color_hex?: string;
+  color_hex: string;
+  order_index?: number;
 }
 
 interface Task {
@@ -71,37 +71,33 @@ function KanbanBoard({ lista, taskCreatedFlag }: { lista: List, taskCreatedFlag?
   // Buscar statuses e tasks
   const fetchBoard = async () => {
     setLoading(true);
+    
     try {
       
-      // Buscar também o campo color_hex e order_index
+      // Buscar statuses pelo project_id e tasks pelo list_id
       const [statusesRes, tasksRes] = await Promise.all([
-        supabase.from("statuses").select("id, name, color_hex, order_index").eq("project_id", lista.project_id).order("order_index", { ascending: true }),
+        supabase.from("statuses").select("id, name, color_hex, created_at, order_index").eq("project_id", lista.project_id).order("order_index", { ascending: true }),
         supabase.from("tasks").select("id, name, description, status_id, assignee, priority, due_date, progress, list_id").eq("list_id", lista.id),
       ]);
       
+      // Tratar erros de forma mais elegante
       if (statusesRes.error) {
         console.error("Erro ao buscar statuses:", statusesRes.error);
-        console.error("Detalhes do erro statuses:", {
-          code: statusesRes.error.code,
-          message: statusesRes.error.message,
-          details: statusesRes.error.details,
-          hint: statusesRes.error.hint
-        });
-      }
-      if (tasksRes.error) {
-        console.error("Erro ao buscar tasks:", tasksRes.error);
-        console.error("Detalhes do erro tasks:", {
-          code: tasksRes.error.code,
-          message: tasksRes.error.message,
-          details: tasksRes.error.details,
-          hint: tasksRes.error.hint
-        });
+        setStatuses([]);
+      } else {
+        setStatuses(statusesRes.data || []);
       }
       
-      setStatuses(statusesRes.data || []);
-      setTasks(tasksRes.data || []);
+      if (tasksRes.error) {
+        console.error("Erro ao buscar tasks:", tasksRes.error);
+        setTasks([]);
+      } else {
+        setTasks(tasksRes.data || []);
+      }
     } catch (err) {
       console.error("Erro ao buscar dados:", err);
+      setStatuses([]);
+      setTasks([]);
     } finally {
       setLoading(false);
     }
@@ -159,22 +155,14 @@ function KanbanBoard({ lista, taskCreatedFlag }: { lista: List, taskCreatedFlag?
       return;
     }
     try {
-      // Buscar o project_id da lista
-      const { data: listData, error: listError } = await supabase
-        .from("lists")
-        .select("project_id")
-        .eq("id", lista.id)
-        .single();
-      if (listError || !listData) throw new Error("Erro ao buscar projeto da lista");
-      // Deduplicação: criar ou reutilizar status
-      await createOrReuseStatus(supabase, listData.project_id, newStatusName.trim(), "#3B82F6"); // Ajuste a cor conforme necessário
-      toast.success("Status criado ou reutilizado com sucesso!");
-    } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Erro ao criar status");
+      // Criar status usando o project_id da lista
+      await createOrReuseStatus(supabase, lista.project_id, newStatusName.trim(), "#3B82F6");
+      setNewStatusName("");
+      fetchBoard();
+    } catch (error) {
+      console.error("Erro ao criar status:", error);
+      toast.error("Erro ao criar status");
     }
-    setNewStatusName("");
-    setCreatingStatus(false);
-    fetchBoard();
   };
 
   // Abrir modal para criar/editar status
@@ -218,27 +206,19 @@ function KanbanBoard({ lista, taskCreatedFlag }: { lista: List, taskCreatedFlag?
     if (oldIndex === -1 || newIndex === -1) return;
     const newOrder = arrayMove(statusOrder, oldIndex, newIndex);
     setStatusOrder(newOrder);
-    // Montar array de status completos na nova ordem
-    const statusesToUpdate = newOrder.map((id, idx) => {
-      const s = statuses.find(st => st.id === id);
-      if (!s) return null;
-      return {
-        id: s.id,
-        project_id: lista.project_id,
-        name: s.name,
-        color_hex: s.color_hex || s.color || "#3B82F6",
-        order_index: idx
-      };
-    }).filter(Boolean);
+    // Atualizar ordem dos statuses
+    const statusesToUpdate = statuses.map((status, index) => ({
+      id: status.id,
+      project_id: lista.project_id,
+      name: status.name,
+      color_hex: status.color_hex,
+      order_index: index
+    }));
+    
     try {
-      await fetch("/api/update-statuses-order", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ statuses: statusesToUpdate }),
-      });
-      fetchBoard();
-    } catch (e) {
-      toast.error("Erro ao atualizar ordem dos status");
+      await supabase.from("statuses").upsert(statusesToUpdate, { onConflict: "id" });
+    } catch (error) {
+      console.error("Erro ao atualizar ordem dos statuses:", error);
     }
   };
 
@@ -279,7 +259,7 @@ function KanbanBoard({ lista, taskCreatedFlag }: { lista: List, taskCreatedFlag?
           onClose={() => setShowStatusModal(false)}
           onStatusSaved={handleStatusSaved}
           status={editingStatus}
-          listId={lista.id}
+          projectId={lista.project_id}
         />
 
         <TaskEditModal
@@ -302,7 +282,6 @@ function KanbanBoard({ lista, taskCreatedFlag }: { lista: List, taskCreatedFlag?
       listeners,
       setNodeRef,
       transform,
-      transition,
       isDragging,
       isOver,
     } = useSortable({ id });
@@ -407,7 +386,7 @@ function KanbanBoard({ lista, taskCreatedFlag }: { lista: List, taskCreatedFlag?
         onClose={() => setShowStatusModal(false)}
         onStatusSaved={handleStatusSaved}
         status={editingStatus}
-        listId={lista.id}
+        projectId={lista.project_id}
       />
 
       <TaskEditModal

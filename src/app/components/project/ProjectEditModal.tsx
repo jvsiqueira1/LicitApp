@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { useSupabase } from "../../context/SupabaseContext";
-import { XMarkIcon, TrashIcon } from "@heroicons/react/24/outline";
+import { TrashIcon } from "@heroicons/react/24/outline";
 import { toast } from "sonner";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
@@ -9,6 +9,8 @@ interface Project {
   id: string;
   name: string;
   color?: string;
+  created_at?: string;
+  updated_at?: string;
 }
 
 interface ProjectEditModalProps {
@@ -100,13 +102,16 @@ export default function ProjectEditModal({
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent>
+      <DialogContent className="sm:max-w-md w-full" style={{ 
+        backgroundColor: 'var(--color-background-primary)', 
+        color: 'var(--color-text-primary)' 
+      }}>
         <DialogHeader>
           <DialogTitle>Editar Projeto</DialogTitle>
         </DialogHeader>
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div>
-            <label htmlFor="project-name" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
+        <form onSubmit={handleSubmit} className="space-y-6 w-full">
+          <div className="space-y-2">
+            <label htmlFor="project-name" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300">
               Nome do Projeto
             </label>
             <input
@@ -115,18 +120,27 @@ export default function ProjectEditModal({
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Nome do projeto"
-              className="w-full bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 rounded-xl px-4 py-3 text-neutral-900 dark:text-neutral-100 placeholder-neutral-400 dark:placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-neutral-500 hover:border-neutral-400 dark:focus:ring-neutral-400 dark:hover:border-neutral-500 transition-colors duration-200"
+              className="w-full rounded-xl px-4 py-3 focus:outline-none focus:ring-2 transition-colors duration-200"
+              style={{
+                backgroundColor: 'var(--color-background-secondary)',
+                color: 'var(--color-text-primary)',
+                border: '1px solid var(--color-border-subtle)'
+              }}
               required
             />
           </div>
-          <div>
-            <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">Cor do Projeto</label>
-            <input
-              type="color"
-              value={color}
-              onChange={e => setColor(e.target.value)}
-              className="w-10 h-10 p-0 border-none bg-transparent cursor-pointer"
-            />
+          
+          <div className="space-y-2">
+            <label className="block text-sm font-medium" style={{ color: 'var(--color-text-primary)' }}>Cor do Projeto</label>
+            <div className="flex items-center gap-3">
+              <input
+                type="color"
+                value={color}
+                onChange={e => setColor(e.target.value)}
+                className="w-10 h-10 p-0 border-none bg-transparent cursor-pointer rounded-lg"
+              />
+              <span className="text-sm" style={{ color: 'var(--color-text-secondary)' }}>{color}</span>
+            </div>
           </div>
 
           {error && (
@@ -135,29 +149,44 @@ export default function ProjectEditModal({
             </div>
           )}
 
-          <div className="flex gap-3 pt-4">
+          <div className="flex justify-between items-center pt-4">
             <button
               type="button"
               onClick={handleDelete}
               disabled={loading}
-              className="flex items-center gap-2 px-4 py-2 text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-xl transition-colors duration-200 disabled:opacity-50 border border-neutral-200 dark:border-neutral-700"
+              className="flex items-center gap-2 px-4 py-2 rounded-xl transition-colors duration-200 disabled:opacity-50"
+              style={{
+                color: 'var(--color-text-secondary)',
+                border: '1px solid var(--color-border-subtle)',
+                backgroundColor: 'transparent'
+              }}
             >
               <TrashIcon className="w-4 h-4" />
               Excluir Projeto
             </button>
-            <div className="flex gap-3 ml-auto">
+            <div className="flex gap-3">
               <button
                 type="button"
                 onClick={onClose}
                 disabled={loading}
-                className="px-6 py-2 text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200 rounded-xl transition-colors duration-200 disabled:opacity-50 border border-neutral-200 dark:border-neutral-700"
+                className="px-6 py-2 rounded-xl transition-colors duration-200 disabled:opacity-50"
+                style={{
+                  color: 'var(--color-text-secondary)',
+                  border: '1px solid var(--color-border-subtle)',
+                  backgroundColor: 'transparent'
+                }}
               >
                 Cancelar
               </button>
               <button
                 type="submit"
                 disabled={loading}
-                className="px-6 py-2 bg-neutral-200 dark:bg-neutral-700 hover:bg-neutral-300 dark:hover:bg-neutral-600 text-neutral-900 dark:text-neutral-100 rounded-xl font-medium transition-colors duration-200 disabled:opacity-50 border border-neutral-200 dark:border-neutral-700"
+                className="px-6 py-2 rounded-xl font-medium transition-colors duration-200 disabled:opacity-50"
+                style={{
+                  backgroundColor: 'var(--color-highlight)',
+                  color: 'var(--color-text-primary)',
+                  border: '1px solid var(--color-border-subtle)'
+                }}
               >
                 {loading ? "Salvando..." : "Salvar"}
               </button>

@@ -9,6 +9,7 @@ import {
   GlobeAltIcon,
 } from "@heroicons/react/24/outline";
 import { createOrReuseStatus } from "@/app/lib/statusUtils";
+import type { Status } from "../../hooks/useStatuses";
 
 interface List {
   id: string;
@@ -21,15 +22,6 @@ interface List {
   value?: number;
   status?: string;
   created_at: string;
-}
-
-export interface Status {
-  id: string;
-  project_id: string;
-  name: string;
-  color: string; // legado, pode ser removido depois
-  color_hex: string; // novo campo para cor exata
-  order_num: number;
 }
 
 interface ListListProps {
@@ -72,11 +64,22 @@ export default function ListList({
     if (propStatuses) return; // Não buscar do Supabase se vier por prop
     // Buscar status personalizados do projeto
     const fetchStatuses = async () => {
+      // Primeiro buscar todas as listas do projeto
+      const { data: lists, error: listsError } = await supabase
+        .from("lists")
+        .select("id")
+        .eq("project_id", projectId);
+      if (listsError) return;
+      
+      if (!lists || lists.length === 0) return;
+      
+      // Depois buscar statuses de todas as listas
+      const listIds = lists.map(list => list.id);
       const { data, error } = await supabase
         .from("statuses")
         .select("*")
-        .eq("project_id", projectId)
-        .order("order_num", { ascending: true });
+        .in("list_id", listIds)
+        .order("created_at", { ascending: true });
       if (!error && data) {
         // setStatuses(data as Status[]); // This line was removed
       } else {

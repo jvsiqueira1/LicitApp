@@ -126,7 +126,7 @@ export default function TemplateListForm({
 
     try {
       // 1. Criar a lista
-      const { data: listData, error: listError } = await supabase
+      const { error: listError, data } = await supabase
         .from("lists")
         .insert({
           name: listName.trim(),
@@ -154,16 +154,13 @@ export default function TemplateListForm({
       if (listError) throw new Error(listError.message || JSON.stringify(listError));
 
       // 2. Criar os statuses do template
-      await Promise.all(
-        template.statuses.map((statusName, index) =>
-          createOrReuseStatus(
-            supabase,
-            selectedProjectId,
-            statusName,
-            getStatusColor(index)
-          )
-        )
-      );
+      if (template.statuses && template.statuses.length > 0) {
+        for (let i = 0; i < template.statuses.length; i++) {
+          const statusName = template.statuses[i];
+          const colorHex = getStatusColor(i);
+          await createOrReuseStatus(supabase, selectedProjectId, statusName, colorHex);
+        }
+      }
 
       setStep("success");
       

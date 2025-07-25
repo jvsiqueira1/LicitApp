@@ -4,7 +4,7 @@ import { Progress } from "@/components/ui/progress";
 import { GripVertical } from "lucide-react";
 
 export interface KanbanColumnProps {
-  status: { id: string; name: string; color?: string; color_hex?: string };
+  status: { id: string; name: string; color_hex: string };
   tasks: Array<{ 
     id: string; 
     name: string; 
@@ -39,7 +39,7 @@ export default function KanbanColumn({ status, tasks, onAddTask, onEditStatus, o
         <div className="flex items-center gap-2">
           <span
             className="inline-block w-4 h-4 rounded-full border border-border-subtle"
-            style={{ backgroundColor: status.color_hex || status.color || '#888' }}
+            style={{ backgroundColor: status.color_hex || '#888' }}
             title="Cor do status"
           />
           <span>{status.name}</span>

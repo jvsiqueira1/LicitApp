@@ -7,7 +7,7 @@ import { toast } from "sonner";
 interface Status {
   id: string;
   name: string;
-  color?: string;
+  color_hex?: string;
 }
 
 interface TaskFormProps {
@@ -36,22 +36,34 @@ export default function TaskForm({
   const [statuses, setStatuses] = useState<Status[]>([]);
   const [statusId, setStatusId] = useState<string>("");
 
-  // Buscar statuses da lista
+  // Buscar statuses do projeto
   useEffect(() => {
     if (!open || !listId) return;
-    setStatuses([]);
-    setStatusId("");
-    supabase
-      .from("statuses")
-      .select("id, name, color")
-      .eq("list_id", listId)
-      .order("order_index", { ascending: true })
-      .then(({ data, error }) => {
-        if (!error && data && data.length > 0) {
-          setStatuses(data);
-          setStatusId(data[0].id); // Seleciona o primeiro status por padrão
-        }
-      });
+    
+    const fetchStatuses = async () => {
+      // Primeiro buscar o project_id da lista
+      const { data: listData, error: listError } = await supabase
+        .from("lists")
+        .select("project_id")
+        .eq("id", listId)
+        .single();
+      
+      if (listError || !listData) return;
+      
+      // Depois buscar statuses do projeto
+      const { data, error } = await supabase
+        .from("statuses")
+        .select("id, name, color_hex")
+        .eq("project_id", listData.project_id)
+        .order("order_index", { ascending: true });
+      
+      if (!error && data && data.length > 0) {
+        setStatuses(data);
+        setStatusId(data[0].id); // Seleciona o primeiro status por padrão
+      }
+    };
+    
+    fetchStatuses();
   }, [open, listId, supabase]);
 
   useEffect(() => {
