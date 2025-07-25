@@ -1,18 +1,18 @@
-# 🏛️ LicitApp - Sistema de Gestão de Licitações
+# 🏛️ ProjectApp - Sistema de Gestão de Projetos
 
-Um sistema moderno e intuitivo para gerenciamento de licitações, projetos e tarefas, desenvolvido com Next.js 14, TypeScript e Supabase.
+Um sistema moderno e intuitivo para gerenciamento de projetos, tarefas e equipes, desenvolvido com Next.js 14, TypeScript e Supabase.
 
 ## 📋 Descrição
 
-O LicitApp é uma aplicação web completa para gestão de licitações públicas e projetos relacionados. O sistema oferece uma interface moderna e responsiva para organizar projetos, listas de tarefas, sprints e pastas de documentos, facilitando o acompanhamento de processos licitatórios.
+O ProjectApp é uma aplicação web completa para gestão de projetos de qualquer natureza. O sistema oferece uma interface moderna e responsiva para organizar projetos, listas de tarefas, sprints e pastas de documentos, facilitando o acompanhamento de processos e atividades.
 
 ## ✨ Funcionalidades Principais
 
 ### 🎯 Gestão de Projetos
-- **Criação e edição** de projetos de licitação
+- **Criação, edição e exclusão** de projetos
 - **Dashboard geral** com visão consolidada de cada projeto
-- **Organização hierárquica** com pastas, listas e sprints
-- **Templates** pré-configurados para diferentes tipos de licitação
+- **Organização hierárquica**: projetos podem conter pastas, listas e sprints
+- **Templates** pré-configurados para diferentes tipos de projetos
 
 ### 📁 Organização de Conteúdo
 - **Pastas**: Agrupamento de listas e documentos relacionados
@@ -22,22 +22,34 @@ O LicitApp é uma aplicação web completa para gestão de licitações pública
 
 ### 📋 Gestão de Tarefas (Kanban)
 - **Board Kanban** com colunas de status personalizáveis
-- **Drag & Drop** para movimentação de tarefas
-- **Progresso visual** com barras de progresso
-- **Checklists** integradas em cada tarefa
+- **Drag & Drop** para movimentação de tarefas entre colunas
+- **Criação, edição e exclusão** de tarefas
+- **Progresso visual** por tarefa (barra de progresso)
+- **Priorização**, **datas de entrega**, **responsável**, **descrição**
+- **Checklists** integradas em cada tarefa, com marcação dinâmica de itens
 - **Ordenação inteligente** por status e nome
 
-### 🎨 Interface Moderna
-- **Design responsivo** para desktop e mobile
-- **Tema escuro** otimizado para produtividade
-- **Componentes shadcn/ui** para consistência visual
-- **Ícones Heroicons** para melhor usabilidade
-- **Animações suaves** e transições
+### 🧩 Templates de Listas
+- **Modelos pré-definidos** para criação rápida de listas com campos e status customizados
+- **Campos personalizados** e status específicos por template
+
+### 📊 Dashboard do Projeto
+- **Visão de listas/sprints recentes**
+- **Cronograma visual** de listas/sprints (com datas, progresso e cores)
+- **Gráfico de status das tarefas** (ex: pizza de status)
+- **Progresso por lista, sprint e tarefa**, com indicadores visuais
 
 ### 🔐 Autenticação e Segurança
 - **Autenticação Supabase** integrada
-- **Controle de acesso** por usuário
+- **Controle de acesso** por usuário (cada usuário acessa apenas seus projetos)
 - **Dados seguros** com backup automático
+
+### 🎨 Interface Moderna
+- **Design responsivo** para desktop e mobile
+- **Tema escuro/claro** otimizado para produtividade
+- **Componentes shadcn/ui** para consistência visual
+- **Ícones Heroicons** para melhor usabilidade
+- **Animações suaves** e transições
 
 ## 🛠️ Tecnologias Utilizadas
 
@@ -197,11 +209,11 @@ Acesse [http://localhost:3000](http://localhost:3000) para ver a aplicação.
 
 ### 1. Primeiro Acesso
 - Faça login com sua conta (o sistema usa autenticação Supabase)
-- Crie seu primeiro projeto de licitação
+- Crie seu primeiro projeto
 
 ### 2. Organizando Projetos
 - **Criar projeto**: Clique no botão "+" na sidebar
-- **Expandir projeto**: Clique no nome do projeto para ver suas listas
+- **Expandir projeto**: Clique no nome do projeto para ver suas listas, pastas e sprints
 - **Criar pastas**: Use o menu de contexto do projeto → "Criar pasta"
 - **Criar listas**: Use o menu de contexto do projeto → "Criar lista"
 - **Criar sprints**: Use o menu de contexto do projeto → "Criar sprint"
@@ -212,11 +224,13 @@ Acesse [http://localhost:3000](http://localhost:3000) para ver a aplicação.
 - **Adicionar tarefa**: Clique em "Adicionar Tarefa" em qualquer coluna
 - **Mover tarefas**: Arraste e solte entre as colunas
 - **Editar tarefa**: Clique nos "..." ao lado da tarefa
+- **Adicionar checklist**: Dentro da tarefa, adicione itens de checklist
 
 ### 4. Funcionalidades Avançadas
 - **Checklists**: Adicione itens de checklist nas tarefas
-- **Progresso**: Acompanhe o progresso visual das tarefas
-- **Templates**: Use templates pré-configurados para acelerar a criação
+- **Progresso**: Acompanhe o progresso visual das tarefas, listas e projetos
+- **Templates**: Use templates pré-configurados para acelerar a criação de listas
+- **Dashboard**: Visualize cronograma, progresso e gráficos do projeto
 
 ## 🏗️ Estrutura do Projeto
 
@@ -279,7 +293,6 @@ Se você encontrar algum problema ou tiver dúvidas:
 
 - [ ] **Notificações em tempo real** com Supabase Realtime
 - [ ] **Relatórios e dashboards** avançados
-- [ ] **Integração com APIs** de licitações públicas
 - [ ] **Sistema de comentários** nas tarefas
 - [ ] **Upload de arquivos** para documentos
 - [ ] **Exportação de dados** em PDF/Excel
@@ -288,4 +301,4 @@ Se você encontrar algum problema ou tiver dúvidas:
 
 ---
 
-**Desenvolvido com ❤️ para facilitar a gestão de licitações públicas**
+**Desenvolvido com ❤️ para facilitar a gestão de projetos**

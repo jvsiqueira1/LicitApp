@@ -38,7 +38,7 @@ export default function Auth() {
 
   return (
     <div className="flex min-h-dvh items-center justify-center bg-[var(--color-background-primary)] px-4 font-sans">
-      <div className="bg-white shadow-xl rounded-2xl w-full max-w-md p-8 flex flex-col gap-6 border border-[var(--color-border-subtle)]">
+      <div className="bg-[var(--color-background-secondary)] shadow-xl rounded-2xl w-full max-w-md p-8 flex flex-col gap-6 border border-[var(--color-border-subtle)]">
         {/* Header visual do LicitApp */}
         <div className="flex flex-col items-center gap-2 mb-2">
           <h1 className="text-2xl font-extrabold text-[var(--color-text-primary)] tracking-tight font-sans">LicitApp</h1>
@@ -60,7 +60,7 @@ export default function Auth() {
                   placeholder="Digite seu e-mail"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="rounded-lg border border-[var(--color-border-subtle)] px-4 py-2 text-base focus:outline-none focus:ring-2 focus:ring-[var(--color-border-subtle)] bg-white text-[var(--color-text-primary)] placeholder-[var(--color-text-secondary)] transition font-sans"
+                  className="rounded-lg border border-[var(--color-border-subtle)] px-4 py-2 text-base focus:outline-none focus:ring-2 focus:ring-[var(--color-border-subtle)] bg-[var(--color-background-primary)] text-[var(--color-text-primary)] placeholder-[var(--color-text-secondary)] transition font-sans"
                   required
                 />
               </div>
@@ -73,7 +73,7 @@ export default function Auth() {
                   placeholder="Digite sua senha"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="rounded-lg border border-[var(--color-border-subtle)] px-4 py-2 text-base focus:outline-none focus:ring-2 focus:ring-[var(--color-border-subtle)] bg-white text-[var(--color-text-primary)] placeholder-[var(--color-text-secondary)] transition font-sans"
+                  className="rounded-lg border border-[var(--color-border-subtle)] px-4 py-2 text-base focus:outline-none focus:ring-2 focus:ring-[var(--color-border-subtle)] bg-[var(--color-background-primary)] text-[var(--color-text-primary)] placeholder-[var(--color-text-secondary)] transition font-sans"
                   required
                 />
               </div>
@@ -82,7 +82,7 @@ export default function Auth() {
               )}
               <button
                 type="submit"
-                className="rounded-lg bg-white border border-[var(--color-text-primary)] text-[var(--color-text-primary)] font-semibold py-2 text-lg shadow transition hover:bg-[var(--color-hover)] disabled:opacity-60 disabled:cursor-not-allowed font-sans focus:ring-2 focus:ring-[var(--color-border-subtle)]"
+                className="rounded-lg bg-[var(--color-background-primary)] border border-[var(--color-border-subtle)] text-[var(--color-text-primary)] font-semibold py-2 text-lg shadow transition hover:bg-[var(--color-hover)] disabled:opacity-60 disabled:cursor-not-allowed font-sans focus:ring-2 focus:ring-[var(--color-border-subtle)]"
                 disabled={loading}
               >
                 {loading ? "Enviando..." : "Entrar"}
@@ -100,7 +100,7 @@ export default function Auth() {
                   placeholder="Digite seu e-mail"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="rounded-lg border border-[var(--color-border-subtle)] px-4 py-2 text-base focus:outline-none focus:ring-2 focus:ring-[var(--color-border-subtle)] bg-white text-[var(--color-text-primary)] placeholder-[var(--color-text-secondary)] transition font-sans"
+                  className="rounded-lg border border-[var(--color-border-subtle)] px-4 py-2 text-base focus:outline-none focus:ring-2 focus:ring-[var(--color-border-subtle)] bg-[var(--color-background-primary)] text-[var(--color-text-primary)] placeholder-[var(--color-text-secondary)] transition font-sans"
                   required
                 />
               </div>
@@ -113,7 +113,7 @@ export default function Auth() {
                   placeholder="Digite sua senha"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="rounded-lg border border-[var(--color-border-subtle)] px-4 py-2 text-base focus:outline-none focus:ring-2 focus:ring-[var(--color-border-subtle)] bg-white text-[var(--color-text-primary)] placeholder-[var(--color-text-secondary)] transition font-sans"
+                  className="rounded-lg border border-[var(--color-border-subtle)] px-4 py-2 text-base focus:outline-none focus:ring-2 focus:ring-[var(--color-border-subtle)] bg-[var(--color-background-primary)] text-[var(--color-text-primary)] placeholder-[var(--color-text-secondary)] transition font-sans"
                   required
                 />
               </div>
@@ -126,7 +126,7 @@ export default function Auth() {
                   placeholder="Confirme sua senha"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
-                  className="rounded-lg border border-[var(--color-border-subtle)] px-4 py-2 text-base focus:outline-none focus:ring-2 focus:ring-[var(--color-border-subtle)] bg-white text-[var(--color-text-primary)] placeholder-[var(--color-text-secondary)] transition font-sans"
+                  className="rounded-lg border border-[var(--color-border-subtle)] px-4 py-2 text-base focus:outline-none focus:ring-2 focus:ring-[var(--color-border-subtle)] bg-[var(--color-background-primary)] text-[var(--color-text-primary)] placeholder-[var(--color-text-secondary)] transition font-sans"
                   required
                 />
               </div>
@@ -135,7 +135,7 @@ export default function Auth() {
               )}
               <button
                 type="submit"
-                className="rounded-lg bg-white border border-[var(--color-text-primary)] text-[var(--color-text-primary)] font-semibold py-2 text-lg shadow transition hover:bg-[var(--color-hover)] disabled:opacity-60 disabled:cursor-not-allowed font-sans focus:ring-2 focus:ring-[var(--color-border-subtle)]"
+                className="rounded-lg bg-[var(--color-background-primary)] border border-[var(--color-border-subtle)] text-[var(--color-text-primary)] font-semibold py-2 text-lg shadow transition hover:bg-[var(--color-hover)] disabled:opacity-60 disabled:cursor-not-allowed font-sans focus:ring-2 focus:ring-[var(--color-border-subtle)]"
                 disabled={loading}
               >
                 {loading ? "Enviando..." : "Cadastrar"}
@@ -143,6 +143,11 @@ export default function Auth() {
             </form>
           </TabsContent>
         </Tabs>
+        
+        {/* Toggle de tema */}
+        <div className="pt-4 border-t border-[var(--color-border-subtle)]">
+          <ToggleTheme />
+        </div>
       </div>
     </div>
   );
