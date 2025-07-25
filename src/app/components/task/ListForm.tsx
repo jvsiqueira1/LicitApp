@@ -253,11 +253,11 @@ export default function ListForm({
   if (!anchorRef) {
     return (
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
-        <div className="w-[520px] max-w-full bg-[var(--color-background-primary)] rounded-3xl shadow-2xl p-10 border border-[var(--color-border-subtle)] animate-fade-in relative transition-all duration-200 flex flex-col max-h-[90vh] overflow-y-auto">
+        <div className="w-[520px] max-w-full bg-background-primary rounded-3xl shadow-2xl p-10 border border-border-subtle animate-fade-in relative transition-all duration-200 flex flex-col max-h-[90vh] overflow-y-auto">
           {/* Botão de fechar */}
           <button
             type="button"
-            className="absolute top-7 right-7 p-2 rounded-full hover:bg-[var(--color-hover)] text-[var(--color-icon-secondary)] hover:text-[var(--color-icon-primary)] transition"
+            className="absolute top-7 right-7 p-2 rounded-full hover:bg-highlight-hover text-[var(--color-icon-secondary)] hover:text-[var(--color-icon-primary)] transition"
             onClick={onClose}
             aria-label="Fechar"
           >
@@ -269,7 +269,7 @@ export default function ListForm({
               {type === "pasta" && <FolderIcon className="w-7 h-7 text-[var(--color-icon-primary)] mr-2" />}
               {type === "sprint" && <RocketLaunchIcon className="w-7 h-7 text-[var(--color-icon-primary)] mr-2" />}
               {type === "lista" && <DocumentTextIcon className="w-7 h-7 text-[var(--color-icon-primary)] mr-2" />}
-              <h2 className="text-2xl font-bold text-[var(--color-text-primary)]">
+              <h2 className="text-2xl font-bold text-text-default">
                 {isEditing
                   ? type === "pasta"
                     ? "Editar pasta"
@@ -283,7 +283,7 @@ export default function ListForm({
                       : "Criar lista"}
               </h2>
             </div>
-            <p className="text-[var(--color-text-secondary)] text-sm">
+            <p className="text-text-muted text-sm">
               {type === "pasta"
                 ? "Agrupe listas, documentos e muito mais."
                 : type === "sprint"
@@ -295,13 +295,13 @@ export default function ListForm({
             {/* Pasta: apenas nome */}
             {type === "pasta" && (
               <div>
-                <label htmlFor="folder-name" className="block text-base font-medium text-[var(--color-text-primary)] mb-2">Nome da Pasta</label>
+                <label htmlFor="folder-name" className="block text-base font-medium text-text-default mb-2">Nome da Pasta</label>
                 <input
                   id="folder-name"
                   type="text"
                   value={name}
                   onChange={e => setName(e.target.value)}
-                  className="w-full rounded-lg border border-[var(--color-border-subtle)] px-4 py-3 text-base bg-[var(--color-background-secondary)] text-[var(--color-text-primary)] placeholder-[var(--color-text-secondary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)] hover:border-[var(--color-hover)] transition-colors duration-200"
+                  className="w-full rounded-lg border border-border-subtle px-4 py-3 text-base bg-background-secondary text-text-default placeholder-[var(--color-text-secondary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)] hover:border-[var(--color-hover)] transition-colors duration-200"
                   required
                   placeholder="Digite o nome da pasta"
                 />
@@ -311,20 +311,20 @@ export default function ListForm({
             {type === "lista" && (
               <>
                 <div>
-                  <label htmlFor="list-name" className="block text-base font-medium text-[var(--color-text-primary)] mb-2">Nome da Lista</label>
+                  <label htmlFor="list-name" className="block text-base font-medium text-text-default mb-2">Nome da Lista</label>
                   <input
                     id="list-name"
                     type="text"
                     value={name}
                     onChange={e => setName(e.target.value)}
-                    className="w-full rounded-lg border border-[var(--color-border-subtle)] px-4 py-3 text-base bg-[var(--color-background-secondary)] text-[var(--color-text-primary)] placeholder-[var(--color-text-secondary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)] hover:border-[var(--color-hover)] transition-colors duration-200"
+                    className="w-full rounded-lg border border-border-subtle px-4 py-3 text-base bg-background-secondary text-text-default placeholder-[var(--color-text-secondary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)] hover:border-[var(--color-hover)] transition-colors duration-200"
                     required
                     placeholder="Digite o nome da lista"
                   />
                 </div>
                 <div className="flex flex-col gap-2 mb-2">
                   <div className="flex items-center gap-4">
-                    <label className="block text-base font-medium text-[var(--color-text-primary)]">Cor</label>
+                    <label className="block text-base font-medium text-text-default">Cor</label>
                     <input
                       type="color"
                       value={color}
@@ -337,32 +337,32 @@ export default function ListForm({
                       value={colorName}
                       onChange={e => setColorName(e.target.value)}
                       placeholder="Nome da cor (ex: Financeiro, Educacional, Jurídico)"
-                      className="rounded-lg border border-[var(--color-border-subtle)] px-3 py-2 text-base bg-[var(--color-background-secondary)] text-[var(--color-text-primary)] placeholder-[var(--color-text-secondary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)]"
+                      className="rounded-lg border border-border-subtle px-3 py-2 text-base bg-background-secondary text-text-default placeholder-[var(--color-text-secondary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)]"
                       maxLength={24}
                     />
-                    <span className="inline-block w-8 h-8 rounded-full border border-[var(--color-border-subtle)]" style={{ background: color }} title={colorName || color} />
+                    <span className="inline-block w-8 h-8 rounded-full border border-border-subtle" style={{ background: color }} title={colorName || color} />
                   </div>
-                  <div className="text-xs text-[var(--color-text-secondary)] ml-1">
+                  <div className="text-xs text-text-muted ml-1">
                     A cor e o nome serão exibidos no dashboard e na sidebar para indicar o tipo ou área da lista (ex: <b>Financeiro</b>, <b>Jurídico</b>, <b>RH</b>).
                   </div>
                 </div>
                 <div className="flex flex-col md:flex-row gap-4 mb-2">
                   <div className="flex-1 flex flex-col">
-                    <label className="block text-base font-medium text-[var(--color-text-primary)] mb-1">Início</label>
+                    <label className="block text-base font-medium text-text-default mb-1">Início</label>
                     <input
                       type="date"
                       value={startDate}
                       onChange={e => setStartDate(e.target.value)}
-                      className="rounded-lg border border-[var(--color-border-subtle)] px-3 py-2 text-base bg-[var(--color-background-secondary)] text-[var(--color-text-primary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)]"
+                      className="rounded-lg border border-border-subtle px-3 py-2 text-base bg-background-secondary text-text-default focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)]"
                     />
                   </div>
                   <div className="flex-1 flex flex-col">
-                    <label className="block text-base font-medium text-[var(--color-text-primary)] mb-1">Término</label>
+                    <label className="block text-base font-medium text-text-default mb-1">Término</label>
                     <input
                       type="date"
                       value={endDate}
                       onChange={e => setEndDate(e.target.value)}
-                      className="rounded-lg border border-[var(--color-border-subtle)] px-3 py-2 text-base bg-[var(--color-background-secondary)] text-[var(--color-text-primary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)]"
+                      className="rounded-lg border border-border-subtle px-3 py-2 text-base bg-background-secondary text-text-default focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)]"
                     />
                   </div>
                 </div>
@@ -372,20 +372,20 @@ export default function ListForm({
             {type === "sprint" && (
               <>
                 <div>
-                  <label htmlFor="sprint-name" className="block text-base font-medium text-[var(--color-text-primary)] mb-2">Nome do Sprint</label>
+                  <label htmlFor="sprint-name" className="block text-base font-medium text-text-default mb-2">Nome do Sprint</label>
                   <input
                     id="sprint-name"
                     type="text"
                     value={name}
                     onChange={e => setName(e.target.value)}
-                    className="w-full rounded-lg border border-[var(--color-border-subtle)] px-4 py-3 text-base bg-[var(--color-background-secondary)] text-[var(--color-text-primary)] placeholder-[var(--color-text-secondary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)] hover:border-[var(--color-hover)] transition-colors duration-200"
+                    className="w-full rounded-lg border border-border-subtle px-4 py-3 text-base bg-background-secondary text-text-default placeholder-[var(--color-text-secondary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)] hover:border-[var(--color-hover)] transition-colors duration-200"
                     required
                     placeholder="Digite o nome do sprint"
                   />
                 </div>
                 <div className="flex flex-col gap-2 mb-2">
                   <div className="flex items-center gap-4">
-                    <label className="block text-base font-medium text-[var(--color-text-primary)]">Cor</label>
+                    <label className="block text-base font-medium text-text-default">Cor</label>
                     <input
                       type="color"
                       value={color}
@@ -398,42 +398,42 @@ export default function ListForm({
                       value={colorName}
                       onChange={e => setColorName(e.target.value)}
                       placeholder="Nome da cor (ex: Financeiro, Educacional, Jurídico)"
-                      className="rounded-lg border border-[var(--color-border-subtle)] px-3 py-2 text-base bg-[var(--color-background-secondary)] text-[var(--color-text-primary)] placeholder-[var(--color-text-secondary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)]"
+                      className="rounded-lg border border-border-subtle px-3 py-2 text-base bg-background-secondary text-text-default placeholder-[var(--color-text-secondary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)]"
                       maxLength={24}
                     />
-                    <span className="inline-block w-8 h-8 rounded-full border border-[var(--color-border-subtle)]" style={{ background: color }} title={colorName || color} />
+                    <span className="inline-block w-8 h-8 rounded-full border border-border-subtle" style={{ background: color }} title={colorName || color} />
                   </div>
-                  <div className="text-xs text-[var(--color-text-secondary)] ml-1">
+                  <div className="text-xs text-text-muted ml-1">
                     A cor e o nome serão exibidos no dashboard e na sidebar para indicar o tipo ou área do sprint (ex: <b>Financeiro</b>, <b>Jurídico</b>, <b>RH</b>).
                   </div>
                 </div>
                 <div className="flex flex-col md:flex-row gap-4 mb-2">
                   <div className="flex-1 flex flex-col">
-                    <label className="block text-base font-medium text-[var(--color-text-primary)] mb-1">Início</label>
+                    <label className="block text-base font-medium text-text-default mb-1">Início</label>
                     <input
                       type="date"
                       value={startDate}
                       onChange={e => setStartDate(e.target.value)}
-                      className="rounded-lg border border-[var(--color-border-subtle)] px-3 py-2 text-base bg-[var(--color-background-secondary)] text-[var(--color-text-primary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)]"
+                      className="rounded-lg border border-border-subtle px-3 py-2 text-base bg-background-secondary text-text-default focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)]"
                     />
                   </div>
                   <div className="flex-1 flex flex-col">
-                    <label className="block text-base font-medium text-[var(--color-text-primary)] mb-1">Término</label>
+                    <label className="block text-base font-medium text-text-default mb-1">Término</label>
                     <input
                       type="date"
                       value={endDate}
                       onChange={e => setEndDate(e.target.value)}
-                      className="rounded-lg border border-[var(--color-border-subtle)] px-3 py-2 text-base bg-[var(--color-background-secondary)] text-[var(--color-text-primary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)]"
+                      className="rounded-lg border border-border-subtle px-3 py-2 text-base bg-background-secondary text-text-default focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)]"
                     />
                   </div>
                 </div>
                 {/* Campos específicos de sprint */}
                 <div className="flex flex-col gap-2 mb-2">
-                  <label className="block text-base font-medium text-[var(--color-text-primary)] mb-1">Medida de esforço</label>
+                  <label className="block text-base font-medium text-text-default mb-1">Medida de esforço</label>
                   <select
                     value={effortType}
                     onChange={(e) => setEffortType(e.target.value as "pontos" | "tempo" | "custom")}
-                    className="w-full rounded-lg border border-[var(--color-border-subtle)] bg-[var(--color-background-secondary)] text-[var(--color-text-primary)] px-4 py-3 text-base"
+                    className="w-full rounded-lg border border-border-subtle bg-background-secondary text-text-default px-4 py-3 text-base"
                   >
                     <option value="pontos">Pontos do Sprint</option>
                     <option value="tempo">Estimativa de tempo</option>
@@ -445,17 +445,17 @@ export default function ListForm({
                       placeholder="Nome do campo personalizado"
                       value={customEffort}
                       onChange={(e) => setCustomEffort(e.target.value)}
-                      className="w-full rounded-lg border border-[var(--color-border-subtle)] bg-[var(--color-background-secondary)] text-[var(--color-text-primary)] px-4 py-3 text-base mt-2"
+                      className="w-full rounded-lg border border-border-subtle bg-background-secondary text-text-default px-4 py-3 text-base mt-2"
                     />
                   )}
                 </div>
                 <div className="flex flex-col md:flex-row gap-4 mb-2">
                   <div className="flex-1 flex flex-col">
-                    <label className="block text-base font-medium text-[var(--color-text-primary)] mb-1">Dia de início do sprint</label>
+                    <label className="block text-base font-medium text-text-default mb-1">Dia de início do sprint</label>
                     <select
                       value={startDay}
                       onChange={(e) => setStartDay(e.target.value)}
-                      className="w-full rounded-lg border border-[var(--color-border-subtle)] bg-[var(--color-background-secondary)] text-[var(--color-text-primary)] px-4 py-3 text-base"
+                      className="w-full rounded-lg border border-border-subtle bg-background-secondary text-text-default px-4 py-3 text-base"
                     >
                       <option value="segunda-feira">Segunda-feira</option>
                       <option value="terça-feira">Terça-feira</option>
@@ -467,13 +467,13 @@ export default function ListForm({
                     </select>
                   </div>
                   <div className="flex-1 flex flex-col">
-                    <label className="block text-base font-medium text-[var(--color-text-primary)] mb-1">Duração (dias)</label>
+                    <label className="block text-base font-medium text-text-default mb-1">Duração (dias)</label>
                     <input
                       type="number"
                       min={1}
                       value={duration}
                       onChange={e => setDuration(Number(e.target.value))}
-                      className="w-full rounded-lg border border-[var(--color-border-subtle)] bg-[var(--color-background-secondary)] text-[var(--color-text-primary)] px-4 py-3 text-base"
+                      className="w-full rounded-lg border border-border-subtle bg-background-secondary text-text-default px-4 py-3 text-base"
                       required
                     />
                   </div>
@@ -481,12 +481,12 @@ export default function ListForm({
               </>
             )}
             {!isEditing && (
-              <p className="text-xs text-[var(--color-text-secondary)]">
+              <p className="text-xs text-text-muted">
                 Os status devem ser criados após a lista ser criada, usando o botão <b>+ novo status</b> no board.
               </p>
             )}
             {error && (
-              <div className="text-[var(--color-destructive, #ef4444)] text-sm bg-[var(--color-background-secondary)] border border-[var(--color-border-subtle)] rounded-lg px-3 py-2">
+              <div className="text-[var(--color-destructive, #ef4444)] text-sm bg-background-secondary border border-border-subtle rounded-lg px-3 py-2">
                 {error}
               </div>
             )}
@@ -494,7 +494,7 @@ export default function ListForm({
               <button
                 type="submit"
                 disabled={loading}
-                className="flex-1 px-4 py-3 bg-[var(--color-highlight)] hover:bg-[var(--color-hover)] text-[var(--color-text-primary)] border border-[var(--color-border-subtle)] rounded-lg font-semibold transition-colors disabled:opacity-50"
+                className="flex-1 px-4 py-3 bg-highlight-light hover:bg-highlight-hover text-text-default border border-border-subtle rounded-lg font-semibold transition-colors disabled:opacity-50"
               >
                 {loading
                   ? (isEditing
@@ -524,7 +524,7 @@ export default function ListForm({
                 type="button"
                 onClick={onClose}
                 disabled={loading}
-                className="flex-1 px-4 py-3 text-[var(--color-text-primary)] bg-[var(--color-background-secondary)] hover:bg-[var(--color-hover)] border border-[var(--color-border-subtle)] rounded-lg font-medium transition-colors disabled:opacity-50"
+                className="flex-1 px-4 py-3 text-text-default bg-background-secondary hover:bg-highlight-hover border border-border-subtle rounded-lg font-medium transition-colors disabled:opacity-50"
               >
                 Cancelar
               </button>
@@ -540,12 +540,12 @@ export default function ListForm({
     <div
       ref={popoverRef}
       style={popoverStyle}
-      className="w-[520px] max-w-full bg-[var(--color-background-primary)] rounded-3xl shadow-2xl p-10 border border-[var(--color-border-subtle)] animate-fade-in relative transition-all duration-200 flex flex-col"
+      className="w-[520px] max-w-full bg-background-primary rounded-3xl shadow-2xl p-10 border border-border-subtle animate-fade-in relative transition-all duration-200 flex flex-col"
     >
       {/* Botão de fechar */}
       <button
         type="button"
-        className="absolute top-7 right-7 p-2 rounded-full hover:bg-[var(--color-hover)] text-[var(--color-icon-secondary)] hover:text-[var(--color-icon-primary)] transition"
+        className="absolute top-7 right-7 p-2 rounded-full hover:bg-highlight-hover text-[var(--color-icon-secondary)] hover:text-[var(--color-icon-primary)] transition"
         onClick={onClose}
         aria-label="Fechar"
       >
@@ -554,25 +554,25 @@ export default function ListForm({
       {/* Escolha de tipo, se não definido */}
       {!type && (
         <div className="flex flex-col items-center justify-center gap-6 py-8">
-          <div className="text-lg font-bold text-[var(--color-text-primary)] mb-2">O que deseja criar?</div>
+          <div className="text-lg font-bold text-text-default mb-2">O que deseja criar?</div>
           <div className="flex gap-4">
             <button
               type="button"
-              className="px-6 py-3 rounded-lg bg-[var(--color-background-secondary)] text-[var(--color-text-primary)] hover:bg-[var(--color-hover)] hover:text-[var(--color-text-primary)] border border-[var(--color-border-subtle)] font-semibold text-base transition-colors duration-200"
+              className="px-6 py-3 rounded-lg bg-background-secondary text-text-default hover:bg-highlight-hover hover:text-text-default border border-border-subtle font-semibold text-base transition-colors duration-200"
               onClick={() => setType("pasta")}
             >
               Pasta
             </button>
             <button
               type="button"
-              className="px-6 py-3 rounded-lg bg-[var(--color-background-secondary)] text-[var(--color-text-primary)] hover:bg-[var(--color-hover)] hover:text-[var(--color-text-primary)] border border-[var(--color-border-subtle)] font-semibold text-base transition-colors duration-200"
+              className="px-6 py-3 rounded-lg bg-background-secondary text-text-default hover:bg-highlight-hover hover:text-text-default border border-border-subtle font-semibold text-base transition-colors duration-200"
               onClick={() => setType("lista")}
             >
               Lista
             </button>
             <button
               type="button"
-              className="px-6 py-3 rounded-lg bg-[var(--color-background-secondary)] text-[var(--color-text-primary)] hover:bg-[var(--color-hover)] hover:text-[var(--color-text-primary)] border border-[var(--color-border-subtle)] font-semibold text-base transition-colors duration-200"
+              className="px-6 py-3 rounded-lg bg-background-secondary text-text-default hover:bg-highlight-hover hover:text-text-default border border-border-subtle font-semibold text-base transition-colors duration-200"
               onClick={() => setType("sprint")}
             >
               Sprint
@@ -584,7 +584,7 @@ export default function ListForm({
       {type && (
         <>
       <div className="mb-8 text-center">
-        <h2 className="text-2xl font-bold text-[var(--color-text-primary)] flex items-center justify-center gap-3 mb-2">
+        <h2 className="text-2xl font-bold text-text-default flex items-center justify-center gap-3 mb-2">
           {type === "sprint" && (
             <RocketLaunchIcon className="w-7 h-7 text-[var(--color-icon-primary)]" />
           )}
@@ -597,18 +597,18 @@ export default function ListForm({
           {type === "pasta" && "Criar pasta"}
         </h2>
         {type === "sprint" && (
-          <p className="text-base text-[var(--color-text-secondary)] mt-1">
+          <p className="text-base text-text-muted mt-1">
             A pasta do sprint ajuda a manter seus sprints organizados e permite
             que você gerencie configurações específicas do sprint.
           </p>
         )}
         {type === "lista" && (
-          <p className="text-base text-[var(--color-text-secondary)] mt-1">
+          <p className="text-base text-text-muted mt-1">
             Acompanhe tarefas, projetos, pessoas e muito mais.
           </p>
         )}
         {type === "pasta" && (
-          <p className="text-base text-[var(--color-text-secondary)] mt-1">
+          <p className="text-base text-text-muted mt-1">
             Agrupe listas, documentos e muito mais.
           </p>
         )}
@@ -617,7 +617,7 @@ export default function ListForm({
         <form onSubmit={handleSubmit} className="flex flex-col gap-8">
           <div>
             <label
-              className="block text-base font-medium text-[var(--color-text-primary)] mb-2"
+              className="block text-base font-medium text-text-default mb-2"
               htmlFor="name"
             >
               {type === "sprint"
@@ -638,7 +638,7 @@ export default function ListForm({
               }
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full rounded-lg border border-[var(--color-border-subtle)] bg-[var(--color-background-secondary)] text-[var(--color-text-primary)] px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-[var(--color-focus)] transition font-sans"
+              className="w-full rounded-lg border border-border-subtle bg-background-secondary text-text-default px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-[var(--color-focus)] transition font-sans"
               required
             />
           </div>
@@ -647,7 +647,7 @@ export default function ListForm({
             <div>
               <div className="flex flex-col gap-2 mb-2">
                 <div className="flex items-center gap-4">
-                  <label className="block text-base font-medium text-[var(--color-text-primary)]">Cor</label>
+                  <label className="block text-base font-medium text-text-default">Cor</label>
                   <input
                     type="color"
                     value={color}
@@ -660,33 +660,33 @@ export default function ListForm({
                     value={colorName}
                     onChange={e => setColorName(e.target.value)}
                     placeholder="Nome da cor (ex: Financeiro, Educacional, Jurídico)"
-                    className="rounded-lg border border-[var(--color-border-subtle)] px-3 py-2 text-base bg-[var(--color-background-secondary)] text-[var(--color-text-primary)] placeholder-[var(--color-text-secondary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)]"
+                    className="rounded-lg border border-border-subtle px-3 py-2 text-base bg-background-secondary text-text-default placeholder-[var(--color-text-secondary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)]"
                     maxLength={24}
                   />
-                  <span className="inline-block w-8 h-8 rounded-full border border-[var(--color-border-subtle)]" style={{ background: color }} title={colorName || color} />
+                  <span className="inline-block w-8 h-8 rounded-full border border-border-subtle" style={{ background: color }} title={colorName || color} />
                 </div>
-                <div className="text-xs text-[var(--color-text-secondary)] ml-1">
+                <div className="text-xs text-text-muted ml-1">
                   A cor e o nome serão exibidos no dashboard e na sidebar para indicar o tipo ou área da lista (ex: <b>Financeiro</b>, <b>Jurídico</b>, <b>RH</b>).
                 </div>
               </div>
               {/* Campos de data de início e término */}
               <div className="flex flex-col md:flex-row gap-4 mb-2">
                 <div className="flex-1 flex flex-col">
-                  <label className="block text-base font-medium text-[var(--color-text-primary)] mb-1">Início</label>
+                  <label className="block text-base font-medium text-text-default mb-1">Início</label>
                   <input
                     type="date"
                     value={startDate}
                     onChange={e => setStartDate(e.target.value)}
-                    className="rounded-lg border border-[var(--color-border-subtle)] px-3 py-2 text-base bg-[var(--color-background-secondary)] text-[var(--color-text-primary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)]"
+                    className="rounded-lg border border-border-subtle px-3 py-2 text-base bg-background-secondary text-text-default focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)]"
                   />
                 </div>
                 <div className="flex-1 flex flex-col">
-                  <label className="block text-base font-medium text-[var(--color-text-primary)] mb-1">Término</label>
+                  <label className="block text-base font-medium text-text-default mb-1">Término</label>
                   <input
                     type="date"
                     value={endDate}
                     onChange={e => setEndDate(e.target.value)}
-                    className="rounded-lg border border-[var(--color-border-subtle)] px-3 py-2 text-base bg-[var(--color-background-secondary)] text-[var(--color-text-primary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)]"
+                    className="rounded-lg border border-border-subtle px-3 py-2 text-base bg-background-secondary text-text-default focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)]"
                   />
                 </div>
               </div>
@@ -695,7 +695,7 @@ export default function ListForm({
           {type === "sprint" && (
             <div className="flex flex-col gap-6">
               <div className="flex flex-col gap-4">
-                <label className="block text-base font-medium text-[var(--color-text-primary)] mb-2">
+                <label className="block text-base font-medium text-text-default mb-2">
                   Medida de esforço
                 </label>
                 <select
@@ -705,7 +705,7 @@ export default function ListForm({
                       e.target.value as "pontos" | "tempo" | "custom",
                     )
                   }
-                  className="w-full rounded-lg border border-[var(--color-border-subtle)] bg-[var(--color-background-secondary)] text-[var(--color-text-primary)] px-4 py-3 text-base"
+                  className="w-full rounded-lg border border-border-subtle bg-background-secondary text-text-default px-4 py-3 text-base"
                 >
                   <option value="pontos">Pontos do Sprint</option>
                   <option value="tempo">Estimativa de tempo</option>
@@ -717,19 +717,19 @@ export default function ListForm({
                     placeholder="Nome do campo personalizado"
                     value={customEffort}
                     onChange={(e) => setCustomEffort(e.target.value)}
-                    className="w-full rounded-lg border border-[var(--color-border-subtle)] bg-[var(--color-background-secondary)] text-[var(--color-text-primary)] px-4 py-3 text-base mt-2"
+                    className="w-full rounded-lg border border-border-subtle bg-background-secondary text-text-default px-4 py-3 text-base mt-2"
                   />
                 )}
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="flex flex-col gap-2">
-                  <label className="block text-base font-medium text-[var(--color-text-primary)] mb-2">
+                  <label className="block text-base font-medium text-text-default mb-2">
                     Dia de início do sprint
                   </label>
                   <select
                     value={startDay}
                     onChange={(e) => setStartDay(e.target.value)}
-                    className="w-full rounded-lg border border-[var(--color-border-subtle)] bg-[var(--color-background-secondary)] text-[var(--color-text-primary)] px-4 py-3 text-base"
+                    className="w-full rounded-lg border border-border-subtle bg-background-secondary text-text-default px-4 py-3 text-base"
                   >
                     <option value="segunda-feira">Segunda-feira</option>
                     <option value="terça-feira">Terça-feira</option>
@@ -741,7 +741,7 @@ export default function ListForm({
                   </select>
                 </div>
                 <div className="flex flex-col gap-2">
-                  <label className="block text-base font-medium text-[var(--color-text-primary)] mb-2">
+                  <label className="block text-base font-medium text-text-default mb-2">
                     Duração do sprint
                   </label>
                   <input
@@ -749,7 +749,7 @@ export default function ListForm({
                     min={1}
                     value={duration}
                     onChange={(e) => setDuration(Number(e.target.value))}
-                    className="w-full rounded-lg border border-[var(--color-border-subtle)] bg-[var(--color-background-secondary)] text-[var(--color-text-primary)] px-4 py-3 text-base"
+                    className="w-full rounded-lg border border-border-subtle bg-background-secondary text-text-default px-4 py-3 text-base"
                     required
                   />
                 </div>
@@ -757,11 +757,11 @@ export default function ListForm({
               <div className="mt-6">
                 <div className="flex items-center gap-2 mb-1">
                   <FolderIcon className="w-5 h-5 text-[var(--color-icon-primary)]" />
-                  <span className="font-semibold text-[var(--color-text-primary)]">
+                  <span className="font-semibold text-text-default">
                     Configurações do sprint
                   </span>
                 </div>
-                <div className="text-xs text-[var(--color-text-secondary)]">
+                <div className="text-xs text-text-muted">
                   Formato, fuso horário, data de início, hora de início, + 1 ...
                 </div>
               </div>
@@ -770,7 +770,7 @@ export default function ListForm({
           {/* No JSX, remova o campo de statusConfig e adicione orientação */}
           {(type === "lista" || type === "sprint") && (
             <div className="flex flex-col gap-4">
-              <span className="text-xs text-[var(--color-text-secondary)]">
+              <span className="text-xs text-text-muted">
                 Os status devem ser criados após a lista ser criada, usando o botão <b>+ novo status</b> no board.
               </span>
             </div>
@@ -796,7 +796,7 @@ export default function ListForm({
             </button>
             <button
               type="button"
-              className="rounded-lg bg-[var(--color-background-tertiary)] hover:bg-[var(--color-background-secondary)] text-[var(--color-text-primary)] font-semibold py-3 px-8 text-base shadow transition-colors duration-200 font-sans"
+              className="rounded-lg bg-[var(--color-background-tertiary)] hover:bg-background-secondary text-text-default font-semibold py-3 px-8 text-base shadow transition-colors duration-200 font-sans"
               onClick={onClose}
             >
               Cancelar

@@ -162,9 +162,9 @@ export default function TaskEditModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
-      <div className="w-[800px] max-w-full bg-[var(--color-background-primary)] rounded-3xl shadow-2xl p-8 border border-[var(--color-border-subtle)] animate-fade-in max-h-[90vh] overflow-y-auto">
+      <div className="w-[800px] max-w-full bg-background-primary rounded-3xl shadow-2xl p-8 border border-border-subtle animate-fade-in max-h-[90vh] overflow-y-auto">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-bold text-[var(--color-text-primary)]">
+          <h2 className="text-xl font-bold text-text-default">
             {task ? "Editar Tarefa" : "Nova Tarefa"}
           </h2>
           <button
@@ -180,13 +180,13 @@ export default function TaskEditModal({
             <Checklist taskId={task.id} />
           </div>
         ) : (
-          <div className="text-[var(--color-text-secondary)] text-sm px-2 py-4 bg-[var(--color-background-secondary)] rounded border border-[var(--color-border-subtle)] mb-6">
+          <div className="text-text-muted text-sm px-2 py-4 bg-background-secondary rounded border border-border-subtle mb-6">
             Salve a tarefa para adicionar um checklist.
           </div>
         )}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="task-name" className="block text-sm font-medium text-[var(--color-text-secondary)] mb-2">
+            <label htmlFor="task-name" className="block text-sm font-medium text-text-muted mb-2">
               Nome da Tarefa
             </label>
             <input
@@ -195,13 +195,13 @@ export default function TaskEditModal({
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Digite o nome da tarefa"
-              className="w-full bg-[var(--color-background-secondary)] border border-[var(--color-border-subtle)] rounded-xl px-4 py-3 text-[var(--color-text-primary)] placeholder-[var(--color-text-secondary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)] hover:border-[var(--color-hover)] transition-colors duration-200"
+              className="w-full bg-background-secondary border border-border-subtle rounded-xl px-4 py-3 text-text-default placeholder-[var(--color-text-secondary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)] hover:border-[var(--color-hover)] transition-colors duration-200"
               required
             />
           </div>
 
           <div>
-            <label htmlFor="task-description" className="block text-sm font-medium text-[var(--color-text-secondary)] mb-2">
+            <label htmlFor="task-description" className="block text-sm font-medium text-text-muted mb-2">
               Descrição
             </label>
             <textarea
@@ -210,12 +210,12 @@ export default function TaskEditModal({
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Descreva a tarefa..."
               rows={3}
-              className="w-full bg-[var(--color-background-secondary)] border border-[var(--color-border-subtle)] rounded-xl px-4 py-3 text-[var(--color-text-primary)] placeholder-[var(--color-text-secondary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)] hover:border-[var(--color-hover)] transition-colors duration-200 resize-none"
+              className="w-full bg-background-secondary border border-border-subtle rounded-xl px-4 py-3 text-text-default placeholder-[var(--color-text-secondary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)] hover:border-[var(--color-hover)] transition-colors duration-200 resize-none"
             />
           </div>
 
           <div>
-            <label htmlFor="task-assignee" className="block text-sm font-medium text-[var(--color-text-secondary)] mb-2">
+            <label htmlFor="task-assignee" className="block text-sm font-medium text-text-muted mb-2">
               Responsável
             </label>
             <div className="relative">
@@ -226,20 +226,20 @@ export default function TaskEditModal({
                 value={assignee}
                 onChange={(e) => setAssignee(e.target.value)}
                 placeholder="Nome do responsável"
-                className="w-full bg-[var(--color-background-secondary)] border border-[var(--color-border-subtle)] rounded-xl pl-10 pr-4 py-3 text-[var(--color-text-primary)] placeholder-[var(--color-text-secondary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)] hover:border-[var(--color-hover)] transition-colors duration-200"
+                className="w-full bg-background-secondary border border-border-subtle rounded-xl pl-10 pr-4 py-3 text-text-default placeholder-[var(--color-text-secondary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)] hover:border-[var(--color-hover)] transition-colors duration-200"
               />
             </div>
           </div>
 
           <div>
-            <label htmlFor="task-priority" className="block text-sm font-medium text-[var(--color-text-secondary)] mb-2">
+            <label htmlFor="task-priority" className="block text-sm font-medium text-text-muted mb-2">
               Prioridade
             </label>
             <select
               id="task-priority"
               value={priority}
               onChange={e => setPriority(e.target.value as "low" | "medium" | "high")}
-              className="w-full bg-[var(--color-background-secondary)] border border-[var(--color-border-subtle)] rounded-xl px-4 py-3 text-[var(--color-text-primary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)] hover:border-[var(--color-hover)] transition-colors duration-200"
+              className="w-full bg-background-secondary border border-border-subtle rounded-xl px-4 py-3 text-text-default focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)] hover:border-[var(--color-hover)] transition-colors duration-200"
             >
               <option value="low">Baixa</option>
               <option value="medium">Média</option>
@@ -248,14 +248,14 @@ export default function TaskEditModal({
           </div>
 
           <div>
-            <label htmlFor="task-status" className="block text-sm font-medium text-[var(--color-text-secondary)] mb-2">
+            <label htmlFor="task-status" className="block text-sm font-medium text-text-muted mb-2">
               Status *
             </label>
             <select
               id="task-status"
               value={statusId}
               onChange={e => setStatusId(e.target.value)}
-              className="w-full bg-[var(--color-background-secondary)] border border-[var(--color-border-subtle)] rounded-xl px-4 py-3 text-[var(--color-text-primary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)] hover:border-[var(--color-hover)] transition-colors duration-200"
+              className="w-full bg-background-secondary border border-border-subtle rounded-xl px-4 py-3 text-text-default focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)] hover:border-[var(--color-hover)] transition-colors duration-200"
               required
             >
               {statuses.length === 0 && <option value="">Nenhum status disponível</option>}
@@ -266,7 +266,7 @@ export default function TaskEditModal({
           </div>
 
           <div>
-            <label htmlFor="task-due-date" className="block text-sm font-medium text-[var(--color-text-secondary)] mb-2">
+            <label htmlFor="task-due-date" className="block text-sm font-medium text-text-muted mb-2">
               Data de Entrega
             </label>
             <input
@@ -274,12 +274,12 @@ export default function TaskEditModal({
               type="date"
               value={dueDate}
               onChange={e => setDueDate(e.target.value)}
-              className="w-full bg-[var(--color-background-secondary)] border border-[var(--color-border-subtle)] rounded-xl px-4 py-3 text-[var(--color-text-primary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)] hover:border-[var(--color-hover)] transition-colors duration-200"
+              className="w-full bg-background-secondary border border-border-subtle rounded-xl px-4 py-3 text-text-default focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)] hover:border-[var(--color-hover)] transition-colors duration-200"
             />
           </div>
 
           <div>
-            <label htmlFor="task-progress" className="block text-sm font-medium text-[var(--color-text-secondary)] mb-2">
+            <label htmlFor="task-progress" className="block text-sm font-medium text-text-muted mb-2">
               Progresso
             </label>
             <div className="flex items-center gap-4">
@@ -292,12 +292,12 @@ export default function TaskEditModal({
                 className="flex-1 h-2 [&_[role=slider]]:bg-[var(--color-progress-fill)] [&_[role=slider]]:border-none [&_[role=slider]]:shadow [&_[role=slider]]:focus-visible:outline-none"
                 aria-label="Progresso da tarefa"
               />
-              <span className="text-xs text-[var(--color-text-secondary)] min-w-[32px] text-right">{progress}%</span>
+              <span className="text-xs text-text-muted min-w-[32px] text-right">{progress}%</span>
             </div>
           </div>
 
           {error && (
-            <div className="text-[var(--color-destructive, #ef4444)] text-sm bg-[var(--color-background-secondary)] border border-[var(--color-border-subtle)] rounded-lg px-3 py-2">
+            <div className="text-[var(--color-destructive, #ef4444)] text-sm bg-background-secondary border border-border-subtle rounded-lg px-3 py-2">
               {error}
             </div>
           )}
@@ -308,7 +308,7 @@ export default function TaskEditModal({
                 type="button"
                 onClick={handleDelete}
                 disabled={loading}
-                className="flex items-center gap-2 px-4 py-2 text-[var(--color-destructive, #ef4444)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-hover)] rounded-xl transition-colors disabled:opacity-50 border border-[var(--color-border-subtle)]"
+                className="flex items-center gap-2 px-4 py-2 text-[var(--color-destructive, #ef4444)] hover:text-text-default hover:bg-highlight-hover rounded-xl transition-colors disabled:opacity-50 border border-border-subtle"
               >
                 <TrashIcon className="w-4 h-4" />
                 Excluir
@@ -319,14 +319,14 @@ export default function TaskEditModal({
                 type="button"
                 onClick={onClose}
                 disabled={loading}
-                className="px-6 py-2 text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] rounded-xl transition-colors disabled:opacity-50 border border-[var(--color-border-subtle)] bg-[var(--color-background-secondary)] hover:bg-[var(--color-hover)]"
+                className="px-6 py-2 text-text-muted hover:text-text-default rounded-xl transition-colors disabled:opacity-50 border border-border-subtle bg-background-secondary hover:bg-highlight-hover"
               >
                 Cancelar
               </button>
               <button
                 type="submit"
                 disabled={loading}
-                className="px-6 py-2 bg-[var(--color-highlight)] hover:bg-[var(--color-hover)] text-[var(--color-text-primary)] rounded-xl font-medium transition-colors disabled:opacity-50 border border-[var(--color-border-subtle)]"
+                className="px-6 py-2 bg-highlight-light hover:bg-highlight-hover text-text-default rounded-xl font-medium transition-colors disabled:opacity-50 border border-border-subtle"
               >
                 {loading ? "Salvando..." : task ? "Salvar" : "Criar"}
               </button>

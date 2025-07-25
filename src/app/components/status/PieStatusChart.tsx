@@ -143,7 +143,7 @@ export const PieStatusChart: React.FC<PieStatusChartProps> = (props) => {
       <div className="flex items-center justify-center h-40 text-muted-foreground">
         Nenhum dado para exibir
         {missingColor.length > 0 && (
-          <div className="text-red-500 text-xs mt-2">Atenção: {missingColor.length} status sem cor definida!</div>
+          <div className="text-status-error text-xs mt-2">Atenção: {missingColor.length} status sem cor definida!</div>
         )}
       </div>
     );
@@ -227,9 +227,9 @@ export const PieStatusChart: React.FC<PieStatusChartProps> = (props) => {
               if (!active || !payload || !payload.length) return null;
               const d = payload[0].payload;
               return (
-                <div className="rounded-lg px-3 py-2 bg-[var(--color-background-secondary)] border border-[var(--color-border-subtle)] text-[var(--color-text-primary)] shadow">
+                <div className="rounded-lg px-3 py-2 bg-background-secondary border border-border-subtle text-text-default shadow">
                   <div className="font-semibold">{d.statusName}</div>
-                  <div className="text-xs text-[var(--color-text-secondary)]">{d.count} tarefa{d.count === 1 ? "" : "s"}</div>
+                  <div className="text-xs text-text-muted">{d.count} tarefa{d.count === 1 ? "" : "s"}</div>
                 </div>
               );
             }}
@@ -253,10 +253,10 @@ export const PieStatusChart: React.FC<PieStatusChartProps> = (props) => {
             }}
           >
             <span
-              className="inline-block w-4 h-4 rounded-full border border-gray-400"
+              className="inline-block w-4 h-4 rounded-full border border-border-subtle"
               style={{ background: status.color_hex || "#888" }}
             />
-            <span className="text-[var(--color-text-primary)]">{status.name}</span>
+            <span className="text-text-default">{status.name}</span>
           </div>
         ))}
       </div>

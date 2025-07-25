@@ -157,9 +157,9 @@ export default function StatusEditModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
-      <div className="w-[400px] max-w-full bg-[var(--color-background-primary)] rounded-2xl shadow-2xl p-8 border border-[var(--color-border-subtle)] animate-fade-in">
+      <div className="w-[400px] max-w-full bg-background-primary rounded-2xl shadow-2xl p-8 border border-border-subtle animate-fade-in">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-bold text-[var(--color-text-primary)]">{status ? "Editar Status" : "Novo Status"}</h2>
+          <h2 className="text-xl font-bold text-text-default">{status ? "Editar Status" : "Novo Status"}</h2>
           <button
             onClick={onClose}
             className="text-[var(--color-icon-secondary)] hover:text-[var(--color-icon-primary)] transition-colors"
@@ -169,19 +169,19 @@ export default function StatusEditModal({
         </div>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="status-name" className="block text-sm font-medium text-[var(--color-text-secondary)] mb-2">Nome do status</label>
+            <label htmlFor="status-name" className="block text-sm font-medium text-text-muted mb-2">Nome do status</label>
             <input
               id="status-name"
               type="text"
               value={name}
               onChange={e => setName(e.target.value)}
-              className="w-full rounded-lg border border-[var(--color-border-subtle)] px-4 py-3 text-base bg-[var(--color-background-secondary)] text-[var(--color-text-primary)] placeholder-[var(--color-text-secondary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)] hover:border-[var(--color-hover)] transition-colors duration-200"
+              className="w-full rounded-lg border border-border-subtle px-4 py-3 text-base bg-background-secondary text-text-default placeholder-[var(--color-text-secondary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)] hover:border-[var(--color-hover)] transition-colors duration-200"
               required
               autoFocus
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-[var(--color-text-secondary)] mb-2">Cor</label>
+            <label className="block text-sm font-medium text-text-muted mb-2">Cor</label>
             <div className="flex items-center gap-3">
               <input
                 type="color"
@@ -190,11 +190,11 @@ export default function StatusEditModal({
                 className="w-10 h-10 p-0 border-none bg-transparent cursor-pointer"
                 aria-label="Selecionar cor do status"
               />
-              <span className="ml-2 text-xs text-[var(--color-text-secondary)]">{color}</span>
+              <span className="ml-2 text-xs text-text-muted">{color}</span>
             </div>
           </div>
           {error && (
-            <div className="text-[var(--color-destructive, #ef4444)] text-sm bg-[var(--color-background-secondary)] border border-[var(--color-border-subtle)] rounded-lg px-3 py-2">
+            <div className="text-[var(--color-destructive, #ef4444)] text-sm bg-background-secondary border border-border-subtle rounded-lg px-3 py-2">
               {error}
             </div>
           )}
@@ -204,7 +204,7 @@ export default function StatusEditModal({
                 type="button"
                 onClick={handleDelete}
                 disabled={loading}
-                className="flex-1 px-4 py-3 text-[var(--color-destructive, #ef4444)] bg-[var(--color-background-secondary)] hover:bg-[var(--color-hover)] border border-[var(--color-border-subtle)] rounded-lg font-medium transition-colors disabled:opacity-50"
+                className="flex-1 px-4 py-3 text-[var(--color-destructive, #ef4444)] bg-background-secondary hover:bg-highlight-hover border border-border-subtle rounded-lg font-medium transition-colors disabled:opacity-50"
               >
                 Excluir
               </button>
@@ -213,14 +213,14 @@ export default function StatusEditModal({
               type="button"
               onClick={onClose}
               disabled={loading}
-              className="flex-1 px-4 py-3 text-[var(--color-text-primary)] bg-[var(--color-background-secondary)] hover:bg-[var(--color-hover)] border border-[var(--color-border-subtle)] rounded-lg font-medium transition-colors disabled:opacity-50"
+              className="flex-1 px-4 py-3 text-text-default bg-background-secondary hover:bg-highlight-hover border border-border-subtle rounded-lg font-medium transition-colors disabled:opacity-50"
             >
               Cancelar
             </button>
             <button
               type="submit"
               disabled={loading}
-              className="flex-1 px-4 py-3 bg-[var(--color-highlight)] hover:bg-[var(--color-hover)] text-[var(--color-text-primary)] border border-[var(--color-border-subtle)] rounded-lg font-semibold transition-colors disabled:opacity-50"
+              className="flex-1 px-4 py-3 bg-highlight-light hover:bg-highlight-hover text-text-default border border-border-subtle rounded-lg font-semibold transition-colors disabled:opacity-50"
             >
               {loading ? "Salvando..." : status ? "Salvar" : "Criar"}
             </button>

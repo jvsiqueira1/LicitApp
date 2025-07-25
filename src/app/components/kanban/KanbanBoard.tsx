@@ -50,7 +50,7 @@ function KanbanBoardWrapper(props: { lista: List, taskCreatedFlag?: number }) {
   const { lista } = props;
   if (!lista || !lista.id || !lista.project_id || !lista.name || !lista.type) {
     console.error('KanbanBoard: lista incompleta recebida:', lista);
-    return <div className="p-8 text-red-500">Erro: Lista incompleta ou inválida selecionada.</div>;
+    return <div className="p-8 text-status-error">Erro: Lista incompleta ou inválida selecionada.</div>;
   }
   return <KanbanBoard {...props} />;
 }
@@ -353,7 +353,7 @@ function KanbanBoard({ lista, taskCreatedFlag }: { lista: List, taskCreatedFlag?
               </div>
             </div>
           ) : (
-            <button className="bg-[var(--color-background-secondary)] border border-[var(--color-border-subtle)] text-[var(--color-text-secondary)] rounded-xl px-4 py-2 hover:bg-[var(--color-hover)] hover:text-[var(--color-text-primary)] transition-colors duration-200" onClick={() => handleOpenStatusModal()}>
+            <button className="bg-background-secondary border border-border-subtle text-text-muted rounded-xl px-4 py-2 hover:bg-highlight-hover hover:text-text-default transition-colors duration-200" onClick={() => handleOpenStatusModal()}>
               + Novo status
             </button>
           )}

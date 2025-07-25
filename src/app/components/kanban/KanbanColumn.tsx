@@ -22,7 +22,7 @@ export interface KanbanColumnProps {
 
 export default function KanbanColumn({ status, tasks, onAddTask, onEditStatus, onEditTask }: KanbanColumnProps) {
   return (
-    <div className="min-w-[320px] w-full flex flex-col mb-2 bg-[var(--color-background-primary)] rounded-xl p-4 border border-[var(--color-border-subtle)]">
+    <div className="min-w-[320px] w-full flex flex-col mb-2 bg-background-primary rounded-xl p-4 border border-border-subtle">
       <div className="flex items-center mb-2">
         <div
           className="flex items-center gap-2 select-none cursor-grab opacity-60 hover:opacity-100 transition-opacity mr-2"
@@ -35,10 +35,10 @@ export default function KanbanColumn({ status, tasks, onAddTask, onEditStatus, o
           <GripVertical className="w-4 h-4 text-[var(--color-border-subtle)]" />
         </div>
       </div>
-      <div className="font-bold text-[var(--color-text-primary)] mb-2 flex items-center justify-between">
+      <div className="font-bold text-text-default mb-2 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <span
-            className="inline-block w-4 h-4 rounded-full border border-[var(--color-border-subtle)]"
+            className="inline-block w-4 h-4 rounded-full border border-border-subtle"
             style={{ backgroundColor: status.color_hex || status.color || '#888' }}
             title="Cor do status"
           />
@@ -58,7 +58,7 @@ export default function KanbanColumn({ status, tasks, onAddTask, onEditStatus, o
       <div className="flex-1 overflow-x-auto">
         <table className="w-full text-left border-collapse">
           <thead>
-            <tr className="text-[var(--color-text-secondary)] text-xs border-b border-[var(--color-border-subtle)]">
+            <tr className="text-text-muted text-xs border-b border-border-subtle">
               <th className="py-1 px-2 font-semibold">Nome</th>
               <th className="py-1 px-2 font-semibold">Data de Entrega</th>
               <th className="py-1 px-2 font-semibold">Progresso</th>
@@ -70,20 +70,20 @@ export default function KanbanColumn({ status, tasks, onAddTask, onEditStatus, o
               <tr
                 key={task.id}
                 className={
-                  "text-sm text-[var(--color-text-primary)] " +
-                  (idx !== tasks.length - 1 ? "border-b border-[var(--color-border-subtle)]" : "") +
-                  " hover:bg-[var(--color-hover)] transition-colors duration-150"
+                  "text-sm text-text-default " +
+                  (idx !== tasks.length - 1 ? "border-b border-border-subtle" : "") +
+                  " hover:bg-highlight-hover transition-colors duration-150"
                 }
                 style={{ background: 'none', boxShadow: 'none', borderRadius: 0 }}
               >
                 <td className="py-2 px-2 cursor-pointer font-medium" onClick={() => onEditTask?.(task.id)}>
                   {task.name}
                 </td>
-                <td className="py-2 px-2 text-[var(--color-text-secondary)] text-xs">{task.due_date ? new Date(task.due_date).toLocaleDateString() : '-'}</td>
+                <td className="py-2 px-2 text-text-muted text-xs">{task.due_date ? new Date(task.due_date).toLocaleDateString() : '-'}</td>
                 <td className="py-2 px-2 w-40">
                   <div className="flex items-center gap-2">
                     <Progress value={task.progress ?? 0} className="w-24" />
-                    <span className="text-xs text-[var(--color-text-secondary)] min-w-[32px] text-right">{task.progress ?? 0}%</span>
+                    <span className="text-xs text-text-muted min-w-[32px] text-right">{task.progress ?? 0}%</span>
                   </div>
                 </td>
                 <td>
@@ -100,10 +100,10 @@ export default function KanbanColumn({ status, tasks, onAddTask, onEditStatus, o
           </tbody>
         </table>
         {tasks.length === 0 && (
-          <div className="text-[var(--color-text-secondary)] text-center py-4">Nenhuma tarefa</div>
+          <div className="text-text-muted text-center py-4">Nenhuma tarefa</div>
         )}
       </div>
-      <button className="mt-2 text-xs text-[var(--color-text-secondary)] hover:underline flex items-center gap-1" onClick={onAddTask}>
+      <button className="mt-2 text-xs text-text-muted hover:underline flex items-center gap-1" onClick={onAddTask}>
         <PlusIcon className="w-4 h-4" />
         Adicionar Tarefa
       </button>

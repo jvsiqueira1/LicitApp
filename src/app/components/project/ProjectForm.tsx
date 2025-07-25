@@ -96,14 +96,14 @@ export default function ProjectForm({ onProjectAdded, open, onClose }: ProjectFo
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
-      <div className="w-[400px] max-w-full bg-[var(--color-background-primary)] rounded-2xl shadow-2xl border border-[var(--color-border-subtle)] animate-fade-in">
-        <div className="flex items-center justify-between p-6 border-b border-[var(--color-border-subtle)]">
-          <h2 className="text-lg font-semibold text-[var(--color-text-primary)]">
+      <div className="w-[400px] max-w-full bg-background-primary rounded-2xl shadow-2xl border border-border-subtle animate-fade-in">
+        <div className="flex items-center justify-between p-6 border-b border-border-subtle">
+          <h2 className="text-lg font-semibold text-text-default">
             Novo projeto
           </h2>
           <button
             onClick={onClose}
-            className="text-[var(--color-icon-secondary)] hover:text-[var(--color-icon-primary)] transition-colors p-1 rounded-lg hover:bg-[var(--color-hover)]"
+            className="text-[var(--color-icon-secondary)] hover:text-[var(--color-icon-primary)] transition-colors p-1 rounded-lg hover:bg-highlight-hover"
           >
             <XMarkIcon className="w-5 h-5" />
           </button>
@@ -112,19 +112,19 @@ export default function ProjectForm({ onProjectAdded, open, onClose }: ProjectFo
         <form onSubmit={handleSubmit} className="p-6 space-y-4">
           {/* Mensagem de plano/trial */}
           {plan === "TRIAL" && trialEndsAt && (
-            <div className="text-xs text-[var(--color-text-secondary)] bg-[var(--color-background-secondary)] border border-[var(--color-border-subtle)] rounded-lg px-3 py-2 mb-2">
+            <div className="text-xs text-text-muted bg-background-secondary border border-border-subtle rounded-lg px-3 py-2 mb-2">
               Seu período trial expira em {new Date(trialEndsAt).toLocaleDateString()}.
             </div>
           )}
           {plan === "FREE" && (
-            <div className="text-xs text-[var(--color-text-secondary)] bg-[var(--color-background-secondary)] border border-[var(--color-border-subtle)] rounded-lg px-3 py-2 mb-2">
+            <div className="text-xs text-text-muted bg-background-secondary border border-border-subtle rounded-lg px-3 py-2 mb-2">
               Seu plano Free permite apenas um projeto. Faça upgrade para criar mais.
             </div>
           )}
           <div>
             <label
               htmlFor="project-name"
-              className="block text-sm font-medium text-[var(--color-text-secondary)] mb-2"
+              className="block text-sm font-medium text-text-muted mb-2"
             >
               Nome do projeto
             </label>
@@ -134,7 +134,7 @@ export default function ProjectForm({ onProjectAdded, open, onClose }: ProjectFo
               placeholder="Digite o nome do projeto"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full rounded-lg border border-[var(--color-border-subtle)] px-4 py-3 text-base bg-[var(--color-background-secondary)] text-[var(--color-text-primary)] placeholder-[var(--color-text-secondary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)] hover:border-[var(--color-hover)] transition-colors duration-200"
+              className="w-full rounded-lg border border-border-subtle px-4 py-3 text-base bg-background-secondary text-text-default placeholder-[var(--color-text-secondary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)] hover:border-[var(--color-hover)] transition-colors duration-200"
               required
               autoFocus
             />
@@ -151,7 +151,7 @@ export default function ProjectForm({ onProjectAdded, open, onClose }: ProjectFo
           </div>
           
           {error && (
-            <div className="text-[var(--color-destructive, #ef4444)] text-sm bg-[var(--color-background-secondary)] border border-[var(--color-border-subtle)] rounded-lg px-3 py-2">
+            <div className="text-[var(--color-destructive, #ef4444)] text-sm bg-background-secondary border border-border-subtle rounded-lg px-3 py-2">
               {error}
             </div>
           )}
@@ -161,14 +161,14 @@ export default function ProjectForm({ onProjectAdded, open, onClose }: ProjectFo
               type="button"
               onClick={onClose}
               disabled={loading}
-              className="flex-1 px-4 py-3 text-[var(--color-text-primary)] bg-[var(--color-background-secondary)] hover:bg-[var(--color-hover)] border border-[var(--color-border-subtle)] rounded-lg font-medium transition-colors disabled:opacity-50"
+              className="flex-1 px-4 py-3 text-text-default bg-background-secondary hover:bg-highlight-hover border border-border-subtle rounded-lg font-medium transition-colors disabled:opacity-50"
             >
               Cancelar
             </button>
             <button
               type="submit"
               disabled={loading}
-              className="flex-1 px-4 py-3 bg-[var(--color-highlight)] hover:bg-[var(--color-hover)] text-[var(--color-text-primary)] border border-[var(--color-border-subtle)] rounded-lg font-semibold transition-colors disabled:opacity-50"
+              className="flex-1 px-4 py-3 bg-highlight-light hover:bg-highlight-hover text-text-default border border-border-subtle rounded-lg font-semibold transition-colors disabled:opacity-50"
             >
               {loading ? "Criando..." : "Criar Projeto"}
             </button>

@@ -148,7 +148,7 @@ export default function ProfileSheetContent({ onNameChange }: { onNameChange?: (
   };
 
   return (
-    <div className="flex flex-col h-full items-center px-2 pt-6 bg-[var(--color-background-primary)] text-[var(--color-text-primary)]">
+    <div className="flex flex-col h-full items-center px-2 pt-6 bg-background-primary text-text-default">
       <SheetHeader>
         <SheetTitle>Perfil do Usuário</SheetTitle>
         <SheetDescription>
@@ -156,11 +156,11 @@ export default function ProfileSheetContent({ onNameChange }: { onNameChange?: (
         </SheetDescription>
       </SheetHeader>
       {/* Avatar e nome/email */}
-      <Avatar className="w-16 h-16 mb-2 text-2xl bg-[var(--color-highlight)] text-[var(--color-icon-primary)]">
+      <Avatar className="w-16 h-16 mb-2 text-2xl bg-highlight-light text-[var(--color-icon-primary)]">
         <AvatarFallback>{(fullName || user?.user_metadata?.name || user?.email || "?")[0]}</AvatarFallback>
       </Avatar>
-      <div className="text-xl font-bold mb-0.5 text-[var(--color-text-primary)]">{fullName || user?.user_metadata?.name || user?.email}</div>
-      <div className="text-sm mb-6 text-[var(--color-text-secondary)]">{user?.email}</div>
+      <div className="text-xl font-bold mb-0.5 text-text-default">{fullName || user?.user_metadata?.name || user?.email}</div>
+      <div className="text-sm mb-6 text-text-muted">{user?.email}</div>
       {/* Input nome */}
       <div className="w-full max-w-sm flex items-end gap-2 mb-6">
         <Input
@@ -168,34 +168,34 @@ export default function ProfileSheetContent({ onNameChange }: { onNameChange?: (
           onChange={e => setFullName(e.target.value)}
           placeholder="Seu nome"
           disabled={saving}
-          className="flex-1 bg-[var(--color-background-secondary)] border border-[var(--color-border-subtle)] text-[var(--color-text-primary)] focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)] hover:border-[var(--color-hover)]"
+          className="flex-1 bg-background-secondary border border-border-subtle text-text-default focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)] hover:border-[var(--color-hover)]"
         />
-        <Button onClick={handleSave} disabled={saving || !fullName.trim()} size="sm" className="h-9 px-4 bg-[var(--color-highlight)] hover:bg-[var(--color-hover)] text-[var(--color-text-primary)] border border-[var(--color-border-subtle)]">
+        <Button onClick={handleSave} disabled={saving || !fullName.trim()} size="sm" className="h-9 px-4 bg-highlight-light hover:bg-highlight-hover text-text-default border border-border-subtle">
           {saving ? "Salvando..." : "Salvar"}
         </Button>
       </div>
       {/* Área de plano Supabase */}
-      <div className="w-full max-w-sm rounded-xl border border-[var(--color-border-subtle)] bg-[var(--color-background-secondary)] p-4 mb-4">
-        <div className="font-semibold mb-1 text-[var(--color-text-primary)]">Plano Atual</div>
+      <div className="w-full max-w-sm rounded-xl border border-border-subtle bg-background-secondary p-4 mb-4">
+        <div className="font-semibold mb-1 text-text-default">Plano Atual</div>
         <div className="mb-1">
           <span className="font-medium">Plano:</span> {plan || "-"}
         </div>
         {plan === "TRIAL" && trialEndsAt && (
-          <div className="mb-1 text-xs text-[var(--color-text-secondary)]">
+          <div className="mb-1 text-xs text-text-muted">
             Seu período trial expira em {new Date(trialEndsAt).toLocaleDateString("pt-BR")}
           </div>
         )}
         {plan === "FREE" && (
-          <div className="mb-1 text-xs text-[var(--color-text-secondary)]">
+          <div className="mb-1 text-xs text-text-muted">
             Seu plano Free permite apenas um projeto. Faça upgrade para criar mais.
           </div>
         )}
       </div>
       {/* Área de assinatura */}
-      <div className="w-full max-w-sm rounded-xl border border-[var(--color-border-subtle)] bg-[var(--color-background-secondary)] p-4 mb-8">
-        <div className="font-semibold mb-1 text-[var(--color-text-primary)]">Assinatura</div>
-        {loading && <p className="text-[var(--color-text-secondary)]">Carregando...</p>}
-        {error && <p className="text-red-500">{error}</p>}
+      <div className="w-full max-w-sm rounded-xl border border-border-subtle bg-background-secondary p-4 mb-8">
+        <div className="font-semibold mb-1 text-text-default">Assinatura</div>
+        {loading && <p className="text-text-muted">Carregando...</p>}
+        {error && <p className="text-status-error">{error}</p>}
         {!loading && !error && (
           <>
             <div className="mb-2">
@@ -233,7 +233,7 @@ export default function ProfileSheetContent({ onNameChange }: { onNameChange?: (
               <Button
                 onClick={handleSubscribe}
                 disabled={loading}
-                className="w-full bg-[var(--color-highlight)] hover:bg-[var(--color-hover)] text-[var(--color-text-primary)] border border-[var(--color-border-subtle)]"
+                className="w-full bg-highlight-light hover:bg-highlight-hover text-text-default border border-border-subtle"
               >
                 Assinar Agora
               </Button>
@@ -242,7 +242,7 @@ export default function ProfileSheetContent({ onNameChange }: { onNameChange?: (
                 variant="secondary"
                 onClick={handleManage}
                 disabled={loading}
-                className="w-full bg-[var(--color-background-primary)] hover:bg-[var(--color-hover)] text-[var(--color-text-primary)] border border-[var(--color-border-subtle)]"
+                className="w-full bg-background-primary hover:bg-highlight-hover text-text-default border border-border-subtle"
               >
                 Gerenciar Assinatura
               </Button>

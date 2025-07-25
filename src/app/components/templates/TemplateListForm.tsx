@@ -318,7 +318,7 @@ export default function TemplateListForm({
                         includeAutomations ? "bg-neutral-700" : "bg-neutral-600"
                       }`}
                     >
-                      <div className={`w-4 h-4 bg-white rounded-full transition-transform ${
+                      <div className={`w-4 h-4 bg-background-primary rounded-full transition-transform ${
                         includeAutomations ? "translate-x-6" : "translate-x-1"
                       }`} />
                     </button>
@@ -333,7 +333,7 @@ export default function TemplateListForm({
                         includeViews ? "bg-neutral-700" : "bg-neutral-600"
                       }`}
                     >
-                      <div className={`w-4 h-4 bg-white rounded-full transition-transform ${
+                      <div className={`w-4 h-4 bg-background-primary rounded-full transition-transform ${
                         includeViews ? "translate-x-6" : "translate-x-1"
                       }`} />
                     </button>
@@ -348,7 +348,7 @@ export default function TemplateListForm({
                         includeTasks ? "bg-neutral-700" : "bg-neutral-600"
                       }`}
                     >
-                      <div className={`w-4 h-4 bg-white rounded-full transition-transform ${
+                      <div className={`w-4 h-4 bg-background-primary rounded-full transition-transform ${
                         includeTasks ? "translate-x-6" : "translate-x-1"
                       }`} />
                     </button>
@@ -472,7 +472,7 @@ export default function TemplateListForm({
                           ignoreWeekends ? "bg-neutral-700" : "bg-neutral-600"
                         }`}
                       >
-                        <div className={`w-4 h-4 bg-white rounded-full transition-transform ${
+                        <div className={`w-4 h-4 bg-background-primary rounded-full transition-transform ${
                           ignoreWeekends ? "translate-x-6" : "translate-x-1"
                         }`} />
                       </button>
@@ -493,7 +493,7 @@ export default function TemplateListForm({
                           importAsOpen ? "bg-neutral-700" : "bg-neutral-600"
                         }`}
                       >
-                        <div className={`w-4 h-4 bg-white rounded-full transition-transform ${
+                        <div className={`w-4 h-4 bg-background-primary rounded-full transition-transform ${
                           importAsOpen ? "translate-x-6" : "translate-x-1"
                         }`} />
                       </button>

@@ -134,7 +134,7 @@ export default function TemplateCenter({ open, onClose, onUseTemplate }: Templat
                   onClick={() => setSelectedTemplate(template)}
                 >
                   <div className="flex items-center gap-4">
-                    <div className="w-16 h-16 bg-white rounded-lg flex items-center justify-center">
+                    <div className="w-16 h-16 bg-background-primary rounded-lg flex items-center justify-center">
                       <DocumentTextIcon className="w-8 h-8 text-neutral-900" />
                     </div>
                     <div className="flex-1">
@@ -186,9 +186,9 @@ export default function TemplateCenter({ open, onClose, onUseTemplate }: Templat
                 </div>
 
                 {/* Template Preview */}
-                <div className="bg-white rounded-lg p-6 text-center">
-                  <h4 className="text-xl font-bold text-black mb-2">{selectedTemplate.thumbnail}</h4>
-                  <p className="text-sm text-gray-600">PALESTRANTES/CONSULTORES</p>
+                <div className="bg-background-primary rounded-lg p-6 text-center">
+                  <h4 className="text-xl font-bold text-text-default mb-2">{selectedTemplate.thumbnail}</h4>
+                  <p className="text-sm text-text-muted">PALESTRANTES/CONSULTORES</p>
                 </div>
 
                 {/* Description */}

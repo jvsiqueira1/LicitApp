@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    /* Tokens HSL */
+    /* Tokens HSL para Shadcn/UI */
     --background: 0 0% 100%;
     --foreground: 0 0% 10%;
     --card: 0 0% 100%;
@@ -30,21 +30,34 @@
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
-    /* Paleta sóbria clara */
-    --color-background-primary: #fff;
-    --color-background-secondary: #f7f7f8;
-    --color-text-primary: #111;
-    --color-text-secondary: #444;
-    --color-border-subtle: #e5e7eb;
-    --color-highlight: #f3f4f6;
-    --color-hover: #ededed;
-    --color-focus-ring: rgba(0,0,0,0.10);
-    --color-icon-primary: #111;
-    --color-icon-secondary: #888;
-    --color-progress-fill: #22C55E;
-    --color-project-indicator: #fff;
+    
+    /* Paleta sóbria clara - Cores base */
+    --color-background-primary: #ffffff; /* Branco puro para fundos principais */
+    --color-background-secondary: #f7f7f8; /* Cinza muito claro para cards e inputs */
+    --color-text-primary: #111111; /* Preto quase absoluto para textos principais */
+    --color-text-secondary: #444444; /* Cinza médio para textos secundários */
+    --color-border-subtle: #e5e7eb; /* Cinza claro para bordas sutis */
+    
+    /* Cores de interação e destaque */
+    --color-highlight: #f3f4f6; /* Cinza claro para highlights de seleção */
+    --color-hover: #ededed; /* Cinza sutil para estados de hover */
+    --color-focus-ring: rgba(0, 0, 0, 0.10); /* Preto translúcido para anel de foco */
+    
+    /* Cores de ícones */
+    --color-icon-primary: #111111; /* Preto para ícones principais */
+    --color-icon-secondary: #888888; /* Cinza para ícones secundários */
+    
+    /* Cores específicas */
+    --color-progress-fill: #22C55E; /* Verde para barras de progresso */
+    --color-project-indicator: #ffffff; /* Branco para indicadores de projeto */
+    
+    /* Cores de marca */
+    --color-brand-primary: #3B82F6; /* Azul vibrante dos botões */
+    --color-brand-secondary: #1E40AF; /* Azul mais escuro para hover */
   }
+  
   .dark {
+    /* Tokens HSL para Shadcn/UI - Dark Mode */
     --background: 0 0% 10%;
     --foreground: 0 0% 98%;
     --card: 0 0% 14%;
@@ -64,21 +77,36 @@
     --border: 0 0% 18%;
     --input: 0 0% 18%;
     --ring: 0 0% 83.1%;
-    --color-background-primary: #18181b;
-    --color-background-secondary: #232326;
-    --color-text-primary: #f3f4f6;
-    --color-text-secondary: #a1a1aa;
-    --color-border-subtle: #27272a;
-    --color-highlight: #232326;
-    --color-hover: #27272a;
-    --color-focus-ring: rgba(255,255,255,0.15);
-    --color-icon-primary: #f3f4f6;
-    --color-icon-secondary: #a1a1aa;
-    --color-project-indicator: #111;
+    
+    /* Paleta sóbria escura - Cores base */
+    --color-background-primary: #18181b; /* Cinza muito escuro para fundos principais */
+    --color-background-secondary: #232326; /* Cinza escuro para cards e inputs */
+    --color-text-primary: #f3f4f6; /* Branco para textos principais */
+    --color-text-secondary: #a1a1aa; /* Cinza claro para textos secundários */
+    --color-border-subtle: #27272a; /* Cinza escuro para bordas sutis */
+    
+    /* Cores de interação e destaque */
+    --color-highlight: #232326; /* Cinza escuro para highlights de seleção */
+    --color-hover: #27272a; /* Cinza um pouco mais claro para estados de hover */
+    --color-focus-ring: rgba(255, 255, 255, 0.15); /* Branco translúcido para anel de foco */
+    
+    /* Cores de ícones */
+    --color-icon-primary: #f3f4f6; /* Branco para ícones principais */
+    --color-icon-secondary: #a1a1aa; /* Cinza claro para ícones secundários */
+    
+    /* Cores específicas */
+    --color-progress-fill: #22C55E; /* Verde para barras de progresso (mantido) */
+    --color-project-indicator: #111111; /* Preto para indicadores de projeto */
+    
+    /* Cores de marca (mantidas para consistência) */
+    --color-brand-primary: #3B82F6; /* Azul vibrante dos botões */
+    --color-brand-secondary: #1E40AF; /* Azul mais escuro para hover */
   }
+  
   * {
     @apply border-[var(--color-border-subtle)];
   }
+  
   body {
     @apply bg-[var(--color-background-primary)] text-[var(--color-text-primary)];
   }
@@ -109,7 +137,7 @@
 }
 
 [data-state='active'].shadcn-tabs-trigger {
-  background: var(--color-background-primary) !important;
+  background: var(--color-background-secondary) !important;
   color: var(--color-text-primary) !important;
   box-shadow: none !important;
   outline: none !important;

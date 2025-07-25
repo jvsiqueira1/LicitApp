@@ -27,8 +27,8 @@ function EditListColorModal({ open, onClose, list, onSaved }: { open: boolean; o
   if (!open) return null;
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
-      <div className="w-80 max-w-full bg-[var(--color-background-primary)] rounded-2xl shadow-2xl p-6 border border-[var(--color-border-subtle)] animate-fade-in flex flex-col gap-4">
-        <div className="text-lg font-bold text-[var(--color-text-primary)] mb-1 text-center">Editar cor da lista</div>
+      <div className="w-80 max-w-full bg-background-primary rounded-2xl shadow-2xl p-6 border border-border-subtle animate-fade-in flex flex-col gap-4">
+        <div className="text-lg font-bold text-text-default mb-1 text-center">Editar cor da lista</div>
         <form
           onSubmit={async (e) => {
             e.preventDefault();
@@ -58,18 +58,18 @@ function EditListColorModal({ open, onClose, list, onSaved }: { open: boolean; o
             />
           </div>
           <div className="flex flex-col gap-1">
-            <label className="block text-sm font-medium text-[var(--color-text-primary)] mb-1" htmlFor="colorNameInput">Nome da cor</label>
+            <label className="block text-sm font-medium text-text-default mb-1" htmlFor="colorNameInput">Nome da cor</label>
             <input
               id="colorNameInput"
               type="text"
               value={colorName}
               onChange={e => setColorName(e.target.value)}
               placeholder="Ex: Financeiro, Jurídico, Projeto..."
-              className="rounded-lg border border-[var(--color-border-subtle)] px-3 py-2 text-base bg-[var(--color-background-secondary)] text-[var(--color-text-primary)] placeholder-[var(--color-text-secondary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)]"
+              className="rounded-lg border border-border-subtle px-3 py-2 text-base bg-background-secondary text-text-default placeholder-[var(--color-text-secondary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)]"
               maxLength={24}
             />
           </div>
-          <div className="text-xs text-[var(--color-text-secondary)] text-left mt-1">
+          <div className="text-xs text-text-muted text-left mt-1">
             A cor e o nome serão exibidos no dashboard e na sidebar para indicar o tipo ou área da lista.
           </div>
           {error && <div className="text-[var(--color-destructive)] text-sm text-center">{error}</div>}
@@ -77,14 +77,14 @@ function EditListColorModal({ open, onClose, list, onSaved }: { open: boolean; o
             <button
               type="button"
               onClick={onClose}
-              className="px-3 py-1.5 rounded-lg bg-[var(--color-background-secondary)] text-[var(--color-text-primary)] border border-[var(--color-border-subtle)] hover:bg-[var(--color-hover)] font-medium text-sm"
+              className="px-3 py-1.5 rounded-lg bg-background-secondary text-text-default border border-border-subtle hover:bg-highlight-hover font-medium text-sm"
               disabled={loading}
             >
               Cancelar
             </button>
             <button
               type="submit"
-              className="px-3 py-1.5 rounded-lg bg-[var(--color-highlight)] text-[var(--color-text-primary)] border border-[var(--color-border-subtle)] hover:bg-[var(--color-hover)] font-semibold text-sm"
+              className="px-3 py-1.5 rounded-lg bg-highlight-light text-text-default border border-border-subtle hover:bg-highlight-hover font-semibold text-sm"
               disabled={loading}
             >
               {loading ? "Salvando..." : "Salvar"}
@@ -190,7 +190,7 @@ export default function ProjectDetailsDashboard({
 
   if (listsLoading || statusesLoading)
     return (
-      <div className="text-center py-8 text-[var(--color-text-secondary)]">
+      <div className="text-center py-8 text-text-muted">
         Carregando dados do projeto...
       </div>
     );
@@ -198,18 +198,18 @@ export default function ProjectDetailsDashboard({
   return (
     <div className="flex flex-col gap-6">
       {!hasAnyList ? (
-        <div className="bg-[var(--color-highlight)] border-l-4 border-[var(--color-border-subtle)] text-[var(--color-text-primary)] p-4 rounded-xl font-medium flex items-center gap-2">
+        <div className="bg-highlight-light border-l-4 border-border-subtle text-text-default p-4 rounded-xl font-medium flex items-center gap-2">
           Para visualizar o dashboard, crie pelo menos uma lista, pasta ou sprint neste projeto.
         </div>
       ) : (
         <>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Recentes */}
-            <div className="bg-[var(--color-background-secondary)] rounded-2xl p-4 border border-[var(--color-border-subtle)] flex flex-col">
-              <div className="font-bold text-[var(--color-text-primary)] mb-2">Recentes</div>
-              <ul className="flex flex-col gap-2 text-[var(--color-text-primary)] text-sm">
+            <div className="bg-background-secondary rounded-2xl p-4 border border-border-subtle flex flex-col">
+              <div className="font-bold text-text-default mb-2">Recentes</div>
+              <ul className="flex flex-col gap-2 text-text-default text-sm">
                 {recentes.length === 0 && (
-                  <li className="text-[var(--color-text-secondary)]">Nenhum item recente</li>
+                  <li className="text-text-muted">Nenhum item recente</li>
                 )}
                 {recentes.map((item) => (
                   <li key={item.id} className="flex items-center gap-2">
@@ -223,19 +223,19 @@ export default function ProjectDetailsDashboard({
                       <FolderIcon className="w-4 h-4 text-[var(--color-icon-primary)]" />
                     )}
                     <span className="font-medium">{item.name}</span>
-                    <span className="text-xs text-[var(--color-text-secondary)]">• {item.type}</span>
+                    <span className="text-xs text-text-muted">• {item.type}</span>
                   </li>
                 ))}
               </ul>
             </div>
             {/* Links (placeholder) */}
-            <div className="bg-[var(--color-background-secondary)] rounded-2xl p-4 border border-[var(--color-border-subtle)] flex flex-col">
-              <div className="font-bold text-[var(--color-text-primary)] mb-2">Links</div>
-              <div className="text-[var(--color-text-secondary)] text-sm">(Em breve)</div>
+            <div className="bg-background-secondary rounded-2xl p-4 border border-border-subtle flex flex-col">
+              <div className="font-bold text-text-default mb-2">Links</div>
+              <div className="text-text-muted text-sm">(Em breve)</div>
             </div>
             {/* Status dos processos (placeholder) */}
-            <div className="bg-[var(--color-background-secondary)] rounded-2xl p-4 border border-[var(--color-border-subtle)] flex flex-col">
-              <div className="font-bold text-[var(--color-text-primary)] mb-2">Status dos processos</div>
+            <div className="bg-background-secondary rounded-2xl p-4 border border-border-subtle flex flex-col">
+              <div className="font-bold text-text-default mb-2">Status dos processos</div>
               {sheetOpen ? null : (
                 <PieStatusChart
                   data={pieData}
@@ -259,11 +259,11 @@ export default function ProjectDetailsDashboard({
             </div>
           </div>
           {/* Cronograma de Projetos/Listas */}
-          <div className="bg-[var(--color-background-secondary)] rounded-2xl p-4 border border-[var(--color-border-subtle)]">
-            <div className="font-bold text-[var(--color-text-primary)] mb-4">Cronograma de Projetos</div>
-            <table className="w-full text-sm text-[var(--color-text-primary)]">
+          <div className="bg-background-secondary rounded-2xl p-4 border border-border-subtle">
+            <div className="font-bold text-text-default mb-4">Cronograma de Projetos</div>
+            <table className="w-full text-sm text-text-default">
               <thead>
-                <tr className="border-b border-[var(--color-border-subtle)]">
+                <tr className="border-b border-border-subtle">
                   <th className="text-left py-2">Nome</th>
                   <th className="text-left py-2">Cor</th>
                   <th className="text-left py-2">Progresso</th>
@@ -274,7 +274,7 @@ export default function ProjectDetailsDashboard({
               <tbody>
                 {cronograma.length === 0 && (
                   <tr>
-                    <td colSpan={5} className="text-center text-[var(--color-text-secondary)] py-4">
+                    <td colSpan={5} className="text-center text-text-muted py-4">
                       Nenhuma lista cadastrada
                     </td>
                   </tr>
@@ -282,9 +282,9 @@ export default function ProjectDetailsDashboard({
                 {cronograma.map((row) => (
                   <tr
                     key={row.id}
-                    className="border-b border-[var(--color-border-subtle)] hover:bg-[var(--color-hover)] transition-colors"
+                    className="border-b border-border-subtle hover:bg-highlight-hover transition-colors"
                   >
-                    <td className="py-2 font-semibold text-[var(--color-text-primary)]">{row.nome}</td>
+                    <td className="py-2 font-semibold text-text-default">{row.nome}</td>
                     <td className="py-2">
                       <span
                         className="inline-block px-3 py-1 rounded-lg text-xs font-bold text-white shadow mr-2 cursor-pointer hover:opacity-80"
@@ -304,11 +304,11 @@ export default function ProjectDetailsDashboard({
                     <td className="py-2">
                       <div className="flex items-center gap-2">
                         <Progress value={row.progresso} className="w-24 h-2" />
-                        <span className="text-xs text-[var(--color-text-secondary)]">{row.textoProgresso}</span>
+                        <span className="text-xs text-text-muted">{row.textoProgresso}</span>
                       </div>
                     </td>
                     <td className="py-2">{row.inicio}</td>
-                    <td className="py-2 font-bold text-[var(--color-text-secondary)]">{row.fim}</td>
+                    <td className="py-2 font-bold text-text-muted">{row.fim}</td>
                   </tr>
                 ))}
               </tbody>
@@ -334,10 +334,10 @@ export default function ProjectDetailsDashboard({
           </div>
           {/* Folders e Docs */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-[var(--color-background-secondary)] rounded-2xl p-4 border border-[var(--color-border-subtle)] flex flex-col min-h-[180px]">
-              <div className="font-bold text-[var(--color-text-primary)] mb-2">Folders</div>
+            <div className="bg-background-secondary rounded-2xl p-4 border border-border-subtle flex flex-col min-h-[180px]">
+              <div className="font-bold text-text-default mb-2">Folders</div>
               {folders.length === 0 ? (
-                <div className="flex-1 flex items-center justify-center text-[var(--color-text-secondary)]">
+                <div className="flex-1 flex items-center justify-center text-text-muted">
                   Nenhuma pasta para mostrar
                 </div>
               ) : (
@@ -345,7 +345,7 @@ export default function ProjectDetailsDashboard({
                   {folders.map((folder) => (
                     <li
                       key={folder.id}
-                      className="flex items-center gap-2 text-[var(--color-text-primary)]"
+                      className="flex items-center gap-2 text-text-default"
                     >
                       <FolderIcon className="w-4 h-4 text-[var(--color-icon-primary)]" />
                       <span>{folder.name}</span>
@@ -354,9 +354,9 @@ export default function ProjectDetailsDashboard({
                 </ul>
               )}
             </div>
-            <div className="bg-[var(--color-background-secondary)] rounded-2xl p-4 border border-[var(--color-border-subtle)] flex flex-col min-h-[180px]">
-              <div className="font-bold text-[var(--color-text-primary)] mb-2">Resoluções e docs</div>
-              <div className="flex-1 flex items-center justify-center text-[var(--color-text-secondary)]">
+            <div className="bg-background-secondary rounded-2xl p-4 border border-border-subtle flex flex-col min-h-[180px]">
+              <div className="font-bold text-text-default mb-2">Resoluções e docs</div>
+              <div className="flex-1 flex items-center justify-center text-text-muted">
                 (Em breve)
               </div>
             </div>

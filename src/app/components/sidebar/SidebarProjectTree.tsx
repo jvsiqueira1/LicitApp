@@ -390,10 +390,10 @@ export default function SidebarProjectTree({ userId, projects, loading, reloadPr
                             lists[project.id]?.some(l => l.id === selectedListId) ||
                             sprints[project.id]?.some(s => s.id === selectedListId) ||
                             folders[project.id]?.some(f => f.id === selectedListId)
-                            ? "bg-[var(--color-highlight)] border-[var(--color-border-subtle)] text-[var(--color-text-primary)]"
+                            ? "bg-highlight-light border-border-subtle text-text-default"
                             : expandedProjectId === project.id && selectedListId === null
-                              ? "bg-[var(--color-hover)] border-[var(--color-border-subtle)] text-[var(--color-text-primary)]"
-                              : "hover:bg-[var(--color-hover)] border border-transparent text-[var(--color-text-primary)]"}
+                              ? "bg-[var(--color-hover)] border-border-subtle text-text-default"
+                              : "hover:bg-highlight-hover border border-transparent text-text-default"}
                           focus:outline focus:outline-2 focus:outline-[var(--color-focus-ring)]`
                         }
                       >
@@ -407,11 +407,11 @@ export default function SidebarProjectTree({ userId, projects, loading, reloadPr
                             }}
                           >
                             <span
-                              className="inline-block w-3 h-3 rounded-full border border-[var(--color-border-subtle)]"
+                              className="inline-block w-3 h-3 rounded-full border border-border-subtle"
                               style={{ background: project.color || '#3B82F6' }}
                               title="Cor do projeto"
                             />
-                            <span className="text-[var(--color-text-primary)]">{project.name}</span>
+                            <span className="text-text-default">{project.name}</span>
                           </span>
                           <span className="flex items-center gap-0.5">
                             <ChevronDownIcon
@@ -421,7 +421,7 @@ export default function SidebarProjectTree({ userId, projects, loading, reloadPr
                             <Popover open={openPopovers[`project-${project.id}`]} onOpenChange={(open) => setOpenPopovers(prev => ({ ...prev, [`project-${project.id}`]: open }))}>
                               <PopoverTrigger asChild>
                                 <button
-                                  className="ml-1 p-1 rounded hover:bg-[var(--color-hover)] focus:bg-[var(--color-hover)]"
+                                  className="ml-1 p-1 rounded hover:bg-highlight-hover focus:bg-[var(--color-hover)]"
                                   onClick={e => e.stopPropagation()}
                                   title="Ações do projeto"
                                 >
@@ -511,12 +511,12 @@ export default function SidebarProjectTree({ userId, projects, loading, reloadPr
                                 {folders[project.id].map((folder) => (
                                   <li key={folder.id} className="group relative">
                                     <div className={`flex items-center justify-between text-sm font-semibold rounded px-2 py-1 mb-1 transition-colors duration-200
-                                      ${selectedListId === folder.id ? "bg-[var(--color-highlight)] border border-[var(--color-border-subtle)] text-[var(--color-text-primary)]" : "hover:bg-[var(--color-hover)] text-[var(--color-text-primary)] border border-transparent"}
+                                      ${selectedListId === folder.id ? "bg-highlight-light border border-border-subtle text-text-default" : "hover:bg-highlight-hover text-text-default border border-transparent"}
                                       focus:outline focus:outline-2 focus:outline-[var(--color-focus-ring)]`
                                     }> {/* highlight só se selecionada, sem bg branco */}
                                       <div className="flex items-center flex-1 min-w-0">
                                         <button
-                                          className="mr-1 p-0.5 rounded hover:bg-[var(--color-hover)] transition-colors duration-200"
+                                          className="mr-1 p-0.5 rounded hover:bg-highlight-hover transition-colors duration-200"
                                           onClick={e => {
                                             e.stopPropagation();
                                             setOpenFolders(prev => ({ ...prev, [folder.id]: !prev[folder.id] }));
@@ -530,7 +530,7 @@ export default function SidebarProjectTree({ userId, projects, loading, reloadPr
                                       <Popover>
                                         <PopoverTrigger asChild>
                                           <button
-                                            className="ml-1 p-1 rounded hover:bg-[var(--color-hover)] focus:bg-[var(--color-hover)] transition-colors duration-200"
+                                            className="ml-1 p-1 rounded hover:bg-highlight-hover focus:bg-[var(--color-hover)] transition-colors duration-200"
                                             onClick={e => e.stopPropagation()}
                                             title="Mais opções"
                                           >
@@ -538,7 +538,7 @@ export default function SidebarProjectTree({ userId, projects, loading, reloadPr
                                           </button>
                                         </PopoverTrigger>
                                         <PopoverContent className="w-48 p-1" align="end">
-                                          <button className="w-full text-left px-2 py-1.5 text-sm rounded-sm text-gray-400 cursor-not-allowed" disabled>Editar pasta</button>
+                                          <button className="w-full text-left px-2 py-1.5 text-sm rounded-sm text-text-muted cursor-not-allowed" disabled>Editar pasta</button>
                                           <button
                                             className="w-full text-left px-2 py-1.5 text-sm rounded-sm hover:bg-[var(--color-accent)] hover:text-[var(--color-accent-foreground)]"
                                             onClick={() => {
@@ -575,20 +575,20 @@ export default function SidebarProjectTree({ userId, projects, loading, reloadPr
                               <ul className="mb-1">
                                 {lists[project.id].filter((l) => !l.folder_id).map((list) => (
                                   <li key={list.id} className={`flex items-center text-sm cursor-pointer px-2 py-1 rounded transition-colors duration-200
-                                    ${selectedListId === list.id ? "bg-[var(--color-highlight)] border border-[var(--color-border-subtle)] text-[var(--color-text-primary)]" : "hover:bg-[var(--color-hover)] text-[var(--color-text-primary)] border border-transparent"}
+                                    ${selectedListId === list.id ? "bg-highlight-light border border-border-subtle text-text-default" : "hover:bg-highlight-hover text-text-default border border-transparent"}
                                     focus:outline focus:outline-2 focus:outline-[var(--color-focus-ring)]`
                                   } onClick={() => {
                                     handleSelectList(list);
                                   }}> {/* highlight lista */}
                                     <span className="flex items-center">
-                                      <span className="inline-block w-3 h-3 rounded-full mr-1 border border-[var(--color-border-subtle)]" style={{ background: list.color || '#8884d8' }} title={list.color_name || 'Cor da lista'} />
+                                      <span className="inline-block w-3 h-3 rounded-full mr-1 border border-border-subtle" style={{ background: list.color || '#8884d8' }} title={list.color_name || 'Cor da lista'} />
                                       <DocumentTextIcon className="w-4 h-4 mr-1 text-[var(--color-icon-secondary)]" />
                                       {list.name}
                                     </span>
                                     <Popover>
                                       <PopoverTrigger asChild>
                                         <button
-                                          className="ml-1 p-1 rounded hover:bg-[var(--color-hover)] focus:bg-[var(--color-hover)]"
+                                          className="ml-1 p-1 rounded hover:bg-highlight-hover focus:bg-[var(--color-hover)]"
                                           onClick={e => e.stopPropagation()}
                                           title="Mais opções"
                                         >
@@ -619,7 +619,7 @@ export default function SidebarProjectTree({ userId, projects, loading, reloadPr
                               <ul>
                                 {sprints[project.id].filter((s) => !s.folder_id).map((sprint) => (
                                   <li key={sprint.id} className={`flex items-center text-sm cursor-pointer px-2 py-1 rounded transition-colors duration-200
-                                    ${selectedListId === sprint.id ? "bg-[var(--color-highlight)] border border-[var(--color-border-subtle)] text-[var(--color-text-primary)]" : "hover:bg-[var(--color-hover)] text-[var(--color-text-primary)] border border-transparent"}
+                                    ${selectedListId === sprint.id ? "bg-highlight-light border border-border-subtle text-text-default" : "hover:bg-highlight-hover text-text-default border border-transparent"}
                                     focus:outline focus:outline-2 focus:outline-[var(--color-focus-ring)]`
                                   }> {/* highlight sprint */}
                                     <span className="flex items-center flex-1" onClick={() => handleSelectSprint(sprint)}>
@@ -628,7 +628,7 @@ export default function SidebarProjectTree({ userId, projects, loading, reloadPr
                                     <Popover>
                                       <PopoverTrigger asChild>
                                         <button
-                                          className="ml-1 p-1 rounded hover:bg-[var(--color-hover)] focus:bg-[var(--color-hover)]"
+                                          className="ml-1 p-1 rounded hover:bg-highlight-hover focus:bg-[var(--color-hover)]"
                                           onClick={e => e.stopPropagation()}
                                           title="Mais opções"
                                         >
@@ -636,7 +636,7 @@ export default function SidebarProjectTree({ userId, projects, loading, reloadPr
                                         </button>
                                       </PopoverTrigger>
                                       <PopoverContent className="w-48 p-1" align="end">
-                                        <button className="w-full text-left px-2 py-1.5 text-sm rounded-sm text-gray-400 cursor-not-allowed" disabled>Editar sprint</button>
+                                        <button className="w-full text-left px-2 py-1.5 text-sm rounded-sm text-text-muted cursor-not-allowed" disabled>Editar sprint</button>
                                         <button
                                           className="w-full text-left px-2 py-1.5 text-sm rounded-sm hover:bg-[var(--color-accent)] hover:text-[var(--color-accent-foreground)]"
                                           onClick={async () => {
@@ -778,8 +778,8 @@ function FolderListsAndSprints({
                 <li
                   className={`flex items-center gap-1 text-xs cursor-pointer px-1 py-0.5 rounded ${
                     selectedListId === list.id 
-                      ? "bg-[var(--color-hover)] text-[var(--color-text-primary)] border border-[var(--color-border-subtle)]" 
-                      : "text-[var(--color-text-primary)] hover:bg-[var(--color-hover)]"
+                      ? "bg-[var(--color-hover)] text-text-default border border-border-subtle" 
+                      : "text-text-default hover:bg-highlight-hover"
                   }`}
                   onClick={() => {
                     const safeList = {
@@ -805,7 +805,7 @@ function FolderListsAndSprints({
                   role="button"
                   style={{ userSelect: 'none' }}
                 >
-                  <span className="inline-block w-3 h-3 rounded-full mr-1 border border-[var(--color-border-subtle)]" style={{ background: list.color || '#8884d8' }} title={list.color_name || 'Cor da lista'} />
+                  <span className="inline-block w-3 h-3 rounded-full mr-1 border border-border-subtle" style={{ background: list.color || '#8884d8' }} title={list.color_name || 'Cor da lista'} />
                   <DocumentTextIcon className="w-4 h-4 mr-1 text-[var(--color-icon-secondary)]" />
                   {list.name}
                 </li>
@@ -843,8 +843,8 @@ function FolderListsAndSprints({
               <ContextMenuTrigger asChild>
                 <li className={`flex items-center gap-1 text-xs cursor-pointer px-1 py-0.5 rounded ${
                   selectedListId === sprint.id 
-                    ? "bg-[var(--color-hover)] text-[var(--color-text-primary)] border border-[var(--color-border-subtle)]" 
-                    : "text-[var(--color-text-primary)] hover:bg-[var(--color-hover)]"
+                    ? "bg-[var(--color-hover)] text-text-default border border-border-subtle" 
+                    : "text-text-default hover:bg-highlight-hover"
                 }`} onClick={() => {
                   onSelectList?.(sprint as unknown as List);
                 }}>

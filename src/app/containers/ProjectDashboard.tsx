@@ -82,12 +82,12 @@ export default function ProjectDashboard() {
 
   return (
     <TaskEventsContext.Provider value={{ onTaskCreated: () => setTaskCreatedFlag(f => f + 1) }}>
-      <div className="min-h-screen font-sans flex bg-[var(--color-background-primary)] text-[var(--color-text-primary)]">
+      <div className="min-h-screen font-sans flex bg-background-primary text-text-default">
         {/* Sidebar fixa */}
-        <aside className="w-64 min-h-screen bg-[var(--color-background-secondary)] border-r border-[var(--color-border-subtle)] flex flex-col py-4 px-2 gap-4 fixed left-0 top-0 z-30">
+        <aside className="w-64 min-h-screen bg-background-secondary border-r border-border-subtle flex flex-col py-4 px-2 gap-4 fixed left-0 top-0 z-30">
           {/* Logo e nome do sistema */}
           <div className="flex items-center gap-2 px-2 mb-2">
-            <span className="text-lg font-bold text-[var(--color-text-primary)] tracking-wide">
+            <span className="text-lg font-bold text-text-default tracking-wide">
               LicitApp
             </span>
             <div className="flex items-center gap-2 ml-auto">
@@ -96,25 +96,25 @@ export default function ProjectDashboard() {
           </div>
           {/* Navegação */}
           <nav className="flex flex-col gap-1 mt-2">
-            <button className="flex items-center gap-2 px-3 py-2 rounded-lg text-[var(--color-text-secondary)] hover:bg-[var(--color-hover)] transition font-medium">
+            <button className="flex items-center gap-2 px-3 py-2 rounded-lg text-text-muted hover:bg-highlight-hover transition font-medium">
               <span className="material-icons text-base">home</span>
               Início
             </button>
-            <button className="flex items-center gap-2 px-3 py-2 rounded-lg text-[var(--color-text-secondary)] hover:bg-[var(--color-hover)] transition font-medium">
+            <button className="flex items-center gap-2 px-3 py-2 rounded-lg text-text-muted hover:bg-highlight-hover transition font-medium">
               <span className="material-icons text-base">calendario</span>
               Planejado
             </button>
           </nav>
           {/* Divider */}
-          <div className="border-t border-[var(--color-border-subtle)] my-3" />
+          <div className="border-t border-border-subtle my-3" />
           {/* Lista de projetos (agora árvore) */}
           <div className="flex-1 overflow-y-auto">
             <div className="flex items-center justify-between px-3 mb-2">
-              <span className="text-xs text-[var(--color-text-secondary)] uppercase font-semibold tracking-wider">
+              <span className="text-xs text-text-muted uppercase font-semibold tracking-wider">
                 PROJETOS
               </span>
               <button
-                className="w-7 h-7 flex items-center justify-center rounded-lg bg-[var(--color-highlight)] hover:bg-[var(--color-hover)] text-[var(--color-icon-primary)] text-lg font-bold transition"
+                className="w-7 h-7 flex items-center justify-center rounded-lg bg-highlight-light hover:bg-highlight-hover text-[var(--color-icon-primary)] text-lg font-bold transition"
                 title="Novo projeto"
                 onClick={() => setShowCreateProject((v) => !v)}
               >
@@ -152,8 +152,8 @@ export default function ProjectDashboard() {
                       <AvatarFallback>{profileName ? profileName[0] : (user.user_metadata?.name?.[0] || user.email[0])}</AvatarFallback>
                     </Avatar>
                     <div className="flex flex-col items-start ml-2">
-                      <span className="text-xs text-[var(--color-text-secondary)] opacity-80 group-hover:opacity-100 transition font-semibold">Perfil</span>
-                      <span className="text-base font-medium text-[var(--color-text-primary)] group-hover:underline transition">
+                      <span className="text-xs text-text-muted opacity-80 group-hover:opacity-100 transition font-semibold">Perfil</span>
+                      <span className="text-base font-medium text-text-default group-hover:underline transition">
                         {profileName || user.user_metadata?.name || user.email}
                       </span>
                     </div>
@@ -166,18 +166,18 @@ export default function ProjectDashboard() {
             )}
             <button
               onClick={handleLogout}
-              className="px-3 py-1 bg-[var(--color-highlight)] text-[var(--color-text-primary)] rounded-lg hover:bg-[var(--color-hover)] transition font-semibold w-full border border-[var(--color-border-subtle)]"
+              className="px-3 py-1 bg-highlight-light text-text-default rounded-lg hover:bg-highlight-hover transition font-semibold w-full border border-border-subtle"
             >
               Sair
             </button>
           </div>
         </aside>
         {/* Conteúdo principal */}
-        <main className="flex-1 ml-64 bg-[var(--color-background-primary)] text-[var(--color-text-primary)]">
+        <main className="flex-1 ml-64 bg-background-primary text-text-default">
           <div className="p-6 max-w-6xl mx-auto">
             {/* SPA: renderiza dashboard ou detalhes conforme seleção */}
             {!selectedProject && !selectedList ? (
-              <div className="text-[var(--color-text-secondary)] dark:text-[var(--color-text-light)] text-center py-16">
+              <div className="text-text-muted dark:text-[var(--color-text-light)] text-center py-16">
                 Selecione um projeto
               </div>
             ) : selectedProject ? (

@@ -27,7 +27,7 @@ export default function ProjectPage() {
   }, [id, supabase]);
 
   if (loading) return <div className="p-8">Carregando projeto...</div>;
-  if (error || !project) return <div className="p-8 text-red-500">Projeto não encontrado.</div>;
+  if (error || !project) return <div className="p-8 text-status-error">Projeto não encontrado.</div>;
 
   return (
     <div className="p-8">

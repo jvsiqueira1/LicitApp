@@ -17,9 +17,9 @@ export interface KanbanTaskProps {
 }
 
 const PRIORITY_COLORS = {
-  low: "text-[var(--color-text-secondary)]",
-  medium: "text-[var(--color-text-secondary)]",
-  high: "text-[var(--color-text-secondary)]"
+  low: "text-text-muted",
+  medium: "text-text-muted",
+  high: "text-text-muted"
 };
 
 const PRIORITY_LABELS = {
@@ -36,16 +36,16 @@ export default function KanbanTask({ task, onEditTask }: KanbanTaskProps) {
 
   return (
     <div 
-      className="bg-[var(--color-background-secondary)] rounded-lg p-3 mb-2 shadow flex flex-col gap-2 border border-[var(--color-border-subtle)] hover:border-[var(--color-hover)] transition-colors duration-200 cursor-pointer group"
+      className="bg-background-secondary rounded-lg p-3 mb-2 shadow flex flex-col gap-2 border border-border-subtle hover:border-[var(--color-hover)] transition-colors duration-200 cursor-pointer group"
       onClick={onEditTask}
     >
       <div className="flex items-start justify-between gap-2">
         <div className="flex-1 min-w-0">
-          <div className="font-semibold text-[var(--color-text-primary)] text-sm leading-tight">
+          <div className="font-semibold text-text-default text-sm leading-tight">
             {task.name}
           </div>
           {task.description && (
-            <div className="text-[var(--color-text-secondary)] text-xs mt-1 line-clamp-2">
+            <div className="text-text-muted text-xs mt-1 line-clamp-2">
               {task.description}
             </div>
           )}
@@ -64,7 +64,7 @@ export default function KanbanTask({ task, onEditTask }: KanbanTaskProps) {
       {/* Meta informações */}
       <div className="flex flex-wrap gap-2 mt-1">
         {task.assignee && (
-          <div className="flex items-center gap-1 text-[var(--color-text-secondary)]">
+          <div className="flex items-center gap-1 text-text-muted">
             <UserIcon className="w-3 h-3" />
             <span>{task.assignee}</span>
           </div>
@@ -76,7 +76,7 @@ export default function KanbanTask({ task, onEditTask }: KanbanTaskProps) {
           </div>
         )}
         {task.due_date && (
-          <div className={`flex items-center gap-1 ${task.due_date && new Date(task.due_date) < new Date() ? 'text-[var(--color-destructive, #ef4444)]' : 'text-[var(--color-text-secondary)]'}`}>
+          <div className={`flex items-center gap-1 ${task.due_date && new Date(task.due_date) < new Date() ? 'text-[var(--color-destructive, #ef4444)]' : 'text-text-muted'}`}>
             <CalendarIcon className="w-3 h-3" />
             <span>{formatDate(task.due_date)}</span>
           </div>

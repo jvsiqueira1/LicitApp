@@ -118,10 +118,10 @@ export default function TaskForm({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
-      <div className="w-[480px] max-w-full bg-[var(--color-background-primary)] rounded-3xl shadow-2xl p-8 border border-[var(--color-border-subtle)] animate-fade-in max-h-[90vh] overflow-y-auto">
+      <div className="w-[480px] max-w-full bg-background-primary rounded-3xl shadow-2xl p-8 border border-border-subtle animate-fade-in max-h-[90vh] overflow-y-auto">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-bold text-[var(--color-text-primary)]">
-            Nova Tarefa {getListTypeIcon()} <span className="text-base font-normal text-[var(--color-text-secondary)]">em {listName}</span>
+          <h2 className="text-xl font-bold text-text-default">
+            Nova Tarefa {getListTypeIcon()} <span className="text-base font-normal text-text-muted">em {listName}</span>
           </h2>
           <button
             onClick={onClose}
@@ -132,7 +132,7 @@ export default function TaskForm({
         </div>
         <form onSubmit={handleSubmit} className="p-2 space-y-4">
           <div>
-            <label htmlFor="task-name" className="block text-sm font-medium text-[var(--color-text-secondary)] mb-2">
+            <label htmlFor="task-name" className="block text-sm font-medium text-text-muted mb-2">
               Nome da tarefa *
             </label>
             <input
@@ -141,13 +141,13 @@ export default function TaskForm({
               placeholder="Digite o nome da tarefa"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full rounded-lg border border-[var(--color-border-subtle)] px-4 py-3 text-base bg-[var(--color-background-secondary)] text-[var(--color-text-primary)] placeholder-[var(--color-text-secondary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)] hover:border-[var(--color-hover)] transition-colors duration-200"
+              className="w-full rounded-lg border border-border-subtle px-4 py-3 text-base bg-background-secondary text-text-default placeholder-[var(--color-text-secondary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)] hover:border-[var(--color-hover)] transition-colors duration-200"
               required
               autoFocus
             />
           </div>
           <div>
-            <label htmlFor="task-description" className="block text-sm font-medium text-[var(--color-text-secondary)] mb-2">
+            <label htmlFor="task-description" className="block text-sm font-medium text-text-muted mb-2">
               Descrição
             </label>
             <textarea
@@ -156,18 +156,18 @@ export default function TaskForm({
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               rows={3}
-              className="w-full rounded-lg border border-[var(--color-border-subtle)] px-4 py-3 text-base bg-[var(--color-background-secondary)] text-[var(--color-text-primary)] placeholder-[var(--color-text-secondary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)] hover:border-[var(--color-hover)] transition-colors duration-200 resize-none"
+              className="w-full rounded-lg border border-border-subtle px-4 py-3 text-base bg-background-secondary text-text-default placeholder-[var(--color-text-secondary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)] hover:border-[var(--color-hover)] transition-colors duration-200 resize-none"
             />
           </div>
           <div>
-            <label htmlFor="task-status" className="block text-sm font-medium text-[var(--color-text-secondary)] mb-2">
+            <label htmlFor="task-status" className="block text-sm font-medium text-text-muted mb-2">
               Status *
             </label>
             <select
               id="task-status"
               value={statusId}
               onChange={e => setStatusId(e.target.value)}
-              className="w-full rounded-lg border border-[var(--color-border-subtle)] px-4 py-3 text-base bg-[var(--color-background-secondary)] text-[var(--color-text-primary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)] hover:border-[var(--color-hover)] transition-colors duration-200"
+              className="w-full rounded-lg border border-border-subtle px-4 py-3 text-base bg-background-secondary text-text-default focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)] hover:border-[var(--color-hover)] transition-colors duration-200"
               required
             >
               {statuses.length === 0 && <option value="">Nenhum status disponível</option>}
@@ -177,14 +177,14 @@ export default function TaskForm({
             </select>
           </div>
           <div>
-            <label htmlFor="task-priority" className="block text-sm font-medium text-[var(--color-text-secondary)] mb-2">
+            <label htmlFor="task-priority" className="block text-sm font-medium text-text-muted mb-2">
               Prioridade
             </label>
             <select
               id="task-priority"
               value={priority}
               onChange={(e) => setPriority(e.target.value as "baixa" | "média" | "alta")}
-              className="w-full rounded-lg border border-[var(--color-border-subtle)] px-4 py-3 text-base bg-[var(--color-background-secondary)] text-[var(--color-text-primary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)] hover:border-[var(--color-hover)] transition-colors duration-200"
+              className="w-full rounded-lg border border-border-subtle px-4 py-3 text-base bg-background-secondary text-text-default focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus-ring)] hover:border-[var(--color-hover)] transition-colors duration-200"
             >
               <option value="baixa">Baixa</option>
               <option value="média">Média</option>
@@ -192,7 +192,7 @@ export default function TaskForm({
             </select>
           </div>
           {error && (
-            <div className="text-[var(--color-destructive, #ef4444)] text-sm bg-[var(--color-background-secondary)] border border-[var(--color-border-subtle)] rounded-lg px-3 py-2">
+            <div className="text-[var(--color-destructive, #ef4444)] text-sm bg-background-secondary border border-border-subtle rounded-lg px-3 py-2">
               {error}
             </div>
           )}
@@ -201,14 +201,14 @@ export default function TaskForm({
               type="button"
               onClick={onClose}
               disabled={loading}
-              className="flex-1 px-4 py-3 text-[var(--color-text-primary)] bg-[var(--color-background-secondary)] hover:bg-[var(--color-hover)] border border-[var(--color-border-subtle)] rounded-lg font-medium transition-colors disabled:opacity-50"
+              className="flex-1 px-4 py-3 text-text-default bg-background-secondary hover:bg-highlight-hover border border-border-subtle rounded-lg font-medium transition-colors disabled:opacity-50"
             >
               Cancelar
             </button>
             <button
               type="submit"
               disabled={loading}
-              className="flex-1 px-4 py-3 bg-[var(--color-highlight)] hover:bg-[var(--color-hover)] text-[var(--color-text-primary)] border border-[var(--color-border-subtle)] rounded-lg font-semibold transition-colors disabled:opacity-50"
+              className="flex-1 px-4 py-3 bg-highlight-light hover:bg-highlight-hover text-text-default border border-border-subtle rounded-lg font-semibold transition-colors disabled:opacity-50"
             >
               {loading ? "Criando..." : "Criar Tarefa"}
             </button>

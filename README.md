@@ -1,10 +1,10 @@
-# 🏛️ ProjectApp - Sistema de Gestão de Projetos
+# 🏛️ LicitApp - Sistema de Gestão de Projetos
 
 Um sistema moderno e intuitivo para gerenciamento de projetos, tarefas e equipes, desenvolvido com Next.js 14, TypeScript e Supabase.
 
 ## 📋 Descrição
 
-O ProjectApp é uma aplicação web completa para gestão de projetos de qualquer natureza. O sistema oferece uma interface moderna e responsiva para organizar projetos, listas de tarefas, sprints e pastas de documentos, facilitando o acompanhamento de processos e atividades.
+O LicitApp é uma aplicação web completa para gestão de projetos de qualquer natureza. O sistema oferece uma interface moderna e responsiva para organizar projetos, listas de tarefas, sprints e pastas de documentos, facilitando o acompanhamento de processos e atividades.
 
 ## ✨ Funcionalidades Principais
 
@@ -47,16 +47,39 @@ O ProjectApp é uma aplicação web completa para gestão de projetos de qualque
 ### 🎨 Interface Moderna
 - **Design responsivo** para desktop e mobile
 - **Tema escuro/claro** otimizado para produtividade
+- **Sistema de design formalizado** com paleta de cores sóbria e profissional
 - **Componentes shadcn/ui** para consistência visual
 - **Ícones Heroicons** para melhor usabilidade
 - **Animações suaves** e transições
+
+## 🎨 Sistema de Design
+
+O LicitApp utiliza um **sistema de design formalizado** com uma paleta de cores sóbria e profissional:
+
+### 🎯 Paleta de Cores
+- **Fundos**: `bg-background-primary` (branco/cinza escuro) e `bg-background-secondary` (cinza claro/escuro)
+- **Textos**: `text-text-default` (preto/branco) e `text-text-muted` (cinza médio/claro)
+- **Bordas**: `border-border-subtle` (cinza claro/escuro)
+- **Marca**: `bg-brand-primary` (#3B82F6) e `bg-brand-secondary` (#1E40AF)
+- **Status**: `text-status-success`, `text-status-error`, `text-status-warning`, `text-status-info`
+
+### 🌙 Dark Mode
+- **Suporte completo** a tema escuro/claro
+- **Transição automática** baseada na preferência do usuário
+- **Cores otimizadas** para ambos os modos
+
+### 📱 Componentes
+- **Botões**: Padrões consistentes para ações primárias, secundárias e destrutivas
+- **Cards**: Fundos com bordas sutis e sombras apropriadas
+- **Inputs**: Estados de foco e erro bem definidos
+- **Modais**: Overlays com backdrop blur e conteúdo elevado
 
 ## 🛠️ Tecnologias Utilizadas
 
 ### Frontend
 - **[Next.js 14](https://nextjs.org/)** - Framework React com App Router
 - **[TypeScript](https://www.typescriptlang.org/)** - Tipagem estática
-- **[Tailwind CSS](https://tailwindcss.com/)** - Framework CSS utilitário
+- **[Tailwind CSS](https://tailwindcss.com/)** - Framework CSS utilitário com sistema de design customizado
 - **[shadcn/ui](https://ui.shadcn.com/)** - Componentes UI reutilizáveis
 - **[Heroicons](https://heroicons.com/)** - Biblioteca de ícones
 
@@ -137,7 +160,7 @@ CREATE TABLE statuses (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   list_id UUID REFERENCES lists(id) ON DELETE CASCADE,
   name TEXT NOT NULL,
-  color TEXT DEFAULT '#10B981',
+  color_hex TEXT DEFAULT '#10B981',
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 ```
@@ -249,11 +272,11 @@ licitacoes-app/
 │   │   ├── context/             # Contextos React
 │   │   ├── hooks/               # Hooks customizados
 │   │   ├── lib/                 # Utilitários e configurações
-│   │   └── globals.css          # Estilos globais
+│   │   └── globals.css          # Estilos globais e variáveis CSS
 │   └── components/
 │       └── ui/                  # Componentes shadcn/ui
 ├── public/                      # Arquivos estáticos
-├── tailwind.config.mjs          # Configuração Tailwind
+├── tailwind.config.mjs          # Configuração Tailwind com sistema de design
 ├── next.config.ts               # Configuração Next.js
 └── package.json                 # Dependências
 ```
@@ -269,6 +292,52 @@ npm run lint         # Executa ESLint
 npm run type-check   # Verifica tipos TypeScript
 ```
 
+## 🎨 Desenvolvimento do Sistema de Design
+
+### Classes Semânticas
+O projeto utiliza classes Tailwind semânticas para manter consistência:
+
+```jsx
+// Fundos
+<div className="bg-background-primary">Fundo principal</div>
+<div className="bg-background-secondary">Fundo secundário</div>
+
+// Textos
+<h1 className="text-text-default">Título principal</h1>
+<p className="text-text-muted">Texto secundário</p>
+
+// Bordas
+<div className="border border-border-subtle">Card com borda</div>
+
+// Status
+<span className="text-status-success">✓ Sucesso</span>
+<span className="text-status-error">✗ Erro</span>
+
+// Marca
+<button className="bg-brand-primary hover:bg-brand-secondary">Botão</button>
+```
+
+### Variáveis CSS
+O sistema utiliza variáveis CSS para suporte a dark mode:
+
+```css
+:root {
+  --color-background-primary: #ffffff;
+  --color-background-secondary: #f7f7f8;
+  --color-text-primary: #111111;
+  --color-text-secondary: #444444;
+  /* ... outras variáveis */
+}
+
+.dark {
+  --color-background-primary: #18181b;
+  --color-background-secondary: #232326;
+  --color-text-primary: #f3f4f6;
+  --color-text-secondary: #a1a1aa;
+  /* ... outras variáveis */
+}
+```
+
 ## 🤝 Contribuindo
 
 1. Faça um fork do projeto
@@ -276,6 +345,12 @@ npm run type-check   # Verifica tipos TypeScript
 3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
 4. Push para a branch (`git push origin feature/AmazingFeature`)
 5. Abra um Pull Request
+
+### Diretrizes de Design
+- Use sempre as **classes semânticas** em vez de cores hardcoded
+- Mantenha **consistência** usando as mesmas classes para o mesmo propósito
+- Respeite o **sistema de cores** estabelecido
+- Teste sempre em **ambos os modos** (claro/escuro)
 
 ## 📝 Licença
 
@@ -298,6 +373,7 @@ Se você encontrar algum problema ou tiver dúvidas:
 - [ ] **Exportação de dados** em PDF/Excel
 - [ ] **Aplicativo mobile** com React Native
 - [ ] **Integração com calendário** para datas importantes
+- [ ] **Temas customizáveis** para diferentes tipos de projeto
 
 ---
 

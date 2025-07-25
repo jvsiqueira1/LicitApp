@@ -107,10 +107,10 @@ export default function ProfilePage() {
   };
 
   return (
-    <div className="max-w-lg mx-auto mt-10 p-6 bg-white rounded shadow">
+    <div className="max-w-lg mx-auto mt-10 p-6 bg-background-primary rounded shadow">
       <h1 className="text-2xl font-bold mb-4">Perfil do Usuário</h1>
       {loading && <p>Carregando...</p>}
-      {error && <p className="text-red-500">{error}</p>}
+      {error && <p className="text-status-error">{error}</p>}
       {!loading && !error && (
         <>
           <div className="mb-4">

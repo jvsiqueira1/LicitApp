@@ -27,7 +27,7 @@ export default function ListaPage() {
   }, [id, supabase]);
 
   if (loading) return <div className="p-8">Carregando lista...</div>;
-  if (error || !lista) return <div className="p-8 text-red-500">Lista não encontrada.</div>;
+  if (error || !lista) return <div className="p-8 text-status-error">Lista não encontrada.</div>;
 
   return (
     <div className="p-8">

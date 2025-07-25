@@ -1,4 +1,6 @@
+/* eslint-disable import/no-anonymous-default-export */
 import defaultTheme from 'tailwindcss/defaultTheme';
+import tailwindcssAnimate from 'tailwindcss-animate';
 
 export default {
   darkMode: ['class', 'class'],
@@ -10,6 +12,59 @@ export default {
   theme: {
   	extend: {
   		colors: {
+  			// Cores base (neutras) - mapeadas para variáveis CSS
+  			background: {
+  				primary: 'var(--color-background-primary)',
+  				secondary: 'var(--color-background-secondary)',
+  			},
+  			text: {
+  				default: 'var(--color-text-primary)',
+  				muted: 'var(--color-text-secondary)',
+  			},
+  			border: {
+  				subtle: 'var(--color-border-subtle)',
+  			},
+  			highlight: {
+  				light: 'var(--color-highlight)',
+  				hover: 'var(--color-hover)',
+  			},
+  			focus: {
+  				ring: 'var(--color-focus-ring)',
+  			},
+  			icon: {
+  				primary: 'var(--color-icon-primary)',
+  				secondary: 'var(--color-icon-secondary)',
+  			},
+  			progress: {
+  				fill: 'var(--color-progress-fill)',
+  			},
+  			project: {
+  				indicator: 'var(--color-project-indicator)',
+  			},
+  			destructive: {
+  				DEFAULT: 'var(--color-destructive, #ef4444)',
+  				foreground: 'var(--color-destructive-foreground, #ffffff)',
+  			},
+  			
+  			// Cores de marca e interação
+  			brand: {
+  				primary: '#3B82F6', // Azul vibrante dos botões
+  				secondary: '#1E40AF', // Azul mais escuro para hover
+  			},
+  			
+  			// Cores de status (mantidas como estão)
+  			status: {
+  				success: '#10B981',
+  				warning: '#F59E0B',
+  				error: '#EF4444',
+  				info: '#3B82F6',
+  				pending: '#6B7280',
+  				completed: '#10B981',
+  				lost: '#EF4444',
+  				active: '#3B82F6'
+  			},
+  			
+  			// Paletas de cores existentes (mantidas para compatibilidade)
   			primary: {
   				'50': '#e0f2fe',
   				'100': '#bfdcfc',
@@ -50,17 +105,8 @@ export default {
   				'800': '#1f2937',
   				'900': '#111827'
   			},
-  			status: {
-  				success: '#10B981',
-  				warning: '#F59E0B',
-  				error: '#EF4444',
-  				info: '#3B82F6',
-  				pending: '#6B7280',
-  				completed: '#10B981',
-  				lost: '#EF4444',
-  				active: '#3B82F6'
-  			},
-  			background: 'hsl(var(--background))',
+  			
+  			// Tokens HSL para Shadcn/UI (mantidos para compatibilidade)
   			foreground: 'hsl(var(--foreground))',
   			card: {
   				DEFAULT: 'hsl(var(--card))',
@@ -78,11 +124,6 @@ export default {
   				DEFAULT: 'hsl(var(--accent))',
   				foreground: 'hsl(var(--accent-foreground))'
   			},
-  			destructive: {
-  				DEFAULT: 'hsl(var(--destructive))',
-  				foreground: 'hsl(var(--destructive-foreground))'
-  			},
-  			border: 'hsl(var(--border))',
   			input: 'hsl(var(--input))',
   			ring: 'hsl(var(--ring))',
   			chart: {
@@ -203,5 +244,5 @@ export default {
   		}
   	}
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [tailwindcssAnimate],
 }; 
