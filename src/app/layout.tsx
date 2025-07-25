@@ -4,7 +4,7 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "LicitApp",
-  description: "Gerencie suas licitações com facilidade",
+  description: "Gerencie suas licitações com facilidade"
 };
 
 export default function RootLayout({
