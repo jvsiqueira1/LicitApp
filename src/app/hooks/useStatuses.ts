@@ -1,6 +1,14 @@
 import { useCallback } from "react";
 import { useSupabase } from "../context/SupabaseContext";
-import type { Status } from "../components/task/ListList";
+
+export interface Status {
+  id: string;
+  project_id: string;
+  name: string;
+  color_hex: string;
+  order_index: number;
+  created_at: string;
+}
 
 export function useStatuses(projectId: string | undefined) {
   const { supabase } = useSupabase();
@@ -17,17 +25,59 @@ export function useStatuses(projectId: string | undefined) {
     return data as Status[];
   }, [projectId, supabase]);
 
-  // Mantém a função de criar status para uso futuro
   const createStatus = useCallback(
-    async (name: string, color: string, listId: string) => {
-      if (!listId) return;
+    async (name: string, color_hex: string, projectId: string) => {
+      if (!projectId) return;
       const { error } = await supabase
         .from("statuses")
-        .insert({ list_id: listId, name, color });
+        .insert({ 
+          project_id: projectId, 
+          name, 
+          color_hex,
+          order_index: 0 // Será atualizado posteriormente se necessário
+        });
       if (error) throw new Error(error.message || JSON.stringify(error));
     },
     [supabase],
   );
 
-  return { fetchStatuses, createStatus };
+  const updateStatus = useCallback(
+    async (statusId: string, updates: Partial<Status>) => {
+      const { error } = await supabase
+        .from("statuses")
+        .update(updates)
+        .eq("id", statusId);
+      if (error) throw new Error(error.message || JSON.stringify(error));
+    },
+    [supabase],
+  );
+
+  const deleteStatus = useCallback(
+    async (statusId: string) => {
+      const { error } = await supabase
+        .from("statuses")
+        .delete()
+        .eq("id", statusId);
+      if (error) throw new Error(error.message || JSON.stringify(error));
+    },
+    [supabase],
+  );
+
+  const updateStatusOrder = useCallback(
+    async (statuses: Array<{ id: string; order_index: number }>) => {
+      const { error } = await supabase
+        .from("statuses")
+        .upsert(statuses, { onConflict: "id" });
+      if (error) throw new Error(error.message || JSON.stringify(error));
+    },
+    [supabase],
+  );
+
+  return { 
+    fetchStatuses, 
+    createStatus, 
+    updateStatus, 
+    deleteStatus, 
+    updateStatusOrder 
+  };
 }
